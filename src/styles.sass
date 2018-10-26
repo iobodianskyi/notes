@@ -1,1 +1,91 @@
-/* You can add global styles to this file, and also import other style files */
+
+// common
+
+// colors
+
+.app-btn
+  width: 150px
+  padding: 5px
+  font-size: 12px
+  border: 1px solid transparent
+  border-radius: .25rem
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out
+  outline: 0 !important
+  user-select: none
+  cursor: pointer
+
+  &.primary
+    margin-bottom: 10px
+    height: 32px
+    line-height: 15px
+    color: rgba(255,255,255,.85)
+    background-color: #6284f3
+  
+  i.fa
+      float: left
+      line-height: 15px 
+
+  &.primary:hover
+    background-color: #3e68f0
+
+// pages
+
+// home
+.home-background
+  height: 100vh
+  background: url('assets/img/home-background.jpg') center center no-repeat
+  background-size: contain
+  background-color: #f7f8fa
+
+  .content
+    height: 100vh
+    color: #5d5c5c
+
+    .home-logo
+      width: 60px
+      margin-bottom: 30px
+
+    .main-title
+      margin: 10px
+      font-size: 50px
+
+    .main-description
+      margin: 30px
+      font-size: 20px
+
+    hr
+      margin: 30px
+
+    .login-container
+      max-width: 300px
+      padding: 20px
+      border-radius: 15px
+      box-shadow: 0 0px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+
+      .sing-text
+        margin-bottom: 20px
+        font-size: 12px
+
+
+// media
+
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 575.98px)
+  .home-background .content .main-title
+    font-size: 30px
+
+  .home-background .content .home-logo
+    width: 40px
+    margin-bottom: 0
+
+// // Small devices (landscape phones, 576px and up)
+// @media (min-width: 576px) and (max-width: 767.98px)
+
+// // Medium devices (tablets, 768px and up)
+// @media (min-width: 768px) and (max-width: 991.98px)
+
+// // Large devices (desktops, 992px and up)
+// @media (min-width: 992px) and (max-width: 1199.98px)
+
+// // Extra large devices (large desktops, 1200px and up)
+// @media (min-width: 1200px)
