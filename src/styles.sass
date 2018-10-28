@@ -2,8 +2,9 @@
 // common
 
 $header-height: 60px
-$offset: 12px
-$box-shadow: 0 0px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+$offset: 15px
+$sidebar-width: 250px
+$box-shadow: 0 0px 3px rgba(0, 0, 0, 0.16), 0 1px 4px rgba(0, 0, 0, 0.23)
 $background-gray: #f8f9fb
 $gray: #6d7e8e
 $teal: #009688
@@ -199,7 +200,7 @@ header
   top: ($header-height + $offset * 2)
   bottom: $offset
   left: $offset
-  width: 250px
+  width: $sidebar-width
   padding-top: 10px
   overflow-y: auto
 
@@ -218,7 +219,7 @@ header
       margin: 0 20px
 
     hr
-      margin: 10px 0px 0px 60px
+      margin: 10px 20px 0px 20px
 
 
 // home-content
@@ -228,7 +229,7 @@ header
   top: ($header-height + $offset * 2)
   right: $offset
   bottom: $offset
-  left: 275px
+  left: ($sidebar-width + $offset * 2)
 
 // media
 
