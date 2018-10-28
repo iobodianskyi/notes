@@ -8,6 +8,10 @@ import { TasksComponent } from './home/tasks/tasks.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './home/header/header.component';
 import { SidebarComponent } from './home/sidebar/sidebar.component';
+import { CompletedComponent } from './home/completed/completed.component';
+import { TrashComponent } from './home/trash/trash.component';
+import { SettingsComponent } from './home/settings/settings.component';
+import { AboutComponent } from './home/about/about.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +20,11 @@ import { SidebarComponent } from './home/sidebar/sidebar.component';
     TasksComponent,
     HomeComponent,
     HeaderComponent,
-    SidebarComponent
+    SidebarComponent,
+    CompletedComponent,
+    TrashComponent,
+    SettingsComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
