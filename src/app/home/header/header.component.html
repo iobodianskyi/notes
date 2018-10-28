@@ -1,4 +1,4 @@
-<header class="animated">
+<header class="boxed animated">
   <div class="d-flex flex-row flex-nowrap align-items-center justify-content-between">
     <div class="header-item d-flex flex-row flex-nowrap align-items-center">
       <div class="nested-item">
@@ -6,10 +6,10 @@
            [ngClass]="menuCollapsed ? 'collapsed' : ''"
            (click)="menuCollapsed = !menuCollapsed"></i>
       </div>
-      <div class="nested-item">
+      <a class="nested-item" routerLink="/tasks">
         <i class="logo fa fa-list-alt"></i>
-      </div>
-      <div class="nested-item logo-title">Task Manager</div>
+      </a>
+      <a class="nested-item logo-title no-select" routerLink="/tasks">Task Manager</a>
     </div>
 
     <div class="header-item d-flex flex-row flex-nowrap align-items-center">

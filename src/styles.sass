@@ -2,6 +2,7 @@
 // common
 
 $header-height: 60px
+$offset: 12px
 $box-shadow: 0 0px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
 $background-gray: #f8f9fb
 $gray: #6d7e8e
@@ -16,6 +17,21 @@ $radius: 10px
 body
   background-color: $background-gray
   color: $gray
+
+a
+  color: $gray
+  text-transform: none
+  text-decoration: none
+
+  &:hover
+    color: $gray
+    text-transform: none
+    text-decoration: none
+
+.boxed
+  background-color: #fff
+  box-shadow: $box-shadow
+  border-radius: $radius
 
 .app-btn
   width: 150px
@@ -107,16 +123,12 @@ body
         font-size: 12px
 
 // header
-
 header
   position: fixed
-  top: 12px
-  right: 12px
-  left: 12px
+  top: $offset
+  right: $offset
+  left: $offset
   height: $header-height
-  background-color: #fff
-  box-shadow: $box-shadow
-  border-radius: $radius
 
   .header-item
     margin-left: 10px
@@ -149,6 +161,8 @@ header
     font-size: 40px
 
   .logo-title
+    font-size: 20px
+    text-shadow: 0 1px 1px #c1bfbf
     white-space: nowrap
 
   .search-container
@@ -178,6 +192,33 @@ header
     width: 35px
     height: 35px
     border-radius: 50%
+
+// sidebar
+#sidebar
+  position: fixed
+  top: ($header-height + $offset * 2)
+  bottom: $offset
+  left: $offset
+  width: 250px
+  padding-top: 10px
+  overflow-y: auto
+
+  &.collapsed
+    transform: translateX(-100%)
+
+  .nav-item
+    padding: 5px 0
+    cursor: pointer
+
+    &:hover,
+    &.active
+      font-weight: bold
+  
+    .fa
+      margin: 0 20px
+
+    hr
+      margin: 10px 0px 0px 60px
 
 // media
 
