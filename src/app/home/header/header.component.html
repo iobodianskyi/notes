@@ -1,3 +1,39 @@
-<p>
-  header works!
-</p>
+<header class="animated">
+  <div class="d-flex flex-row flex-nowrap align-items-center justify-content-between">
+    <div class="header-item d-flex flex-row flex-nowrap align-items-center">
+      <div class="nested-item">
+        <i class="icon animated pointer fa fa-ellipsis-h"
+           [ngClass]="menuCollapsed ? 'collapsed' : ''"
+           (click)="menuCollapsed = !menuCollapsed"></i>
+      </div>
+      <div class="nested-item">
+        <i class="logo fa fa-list-alt"></i>
+      </div>
+      <div class="nested-item logo-title">Task Manager</div>
+    </div>
+
+    <div class="header-item d-flex flex-row flex-nowrap align-items-center">
+      <div class="nested-item search-container d-flex flex-row flex-nowrap align-items-center">
+        <label for="search">
+          <i class="fa fa-search"></i>
+        </label>
+        <input id="search"
+               class="form-control"
+               type="text"
+               placeholder="Search">
+      </div>
+      <div class="nested-item">
+        <i class="fa fa-square pointer teal"></i>
+        <i class="fa fa-square pointer blue"></i>
+        <i class="fa fa-square pointer deep-orange"></i>
+        <i class="fa fa-square pointer amber"></i>
+        <i class="fa fa-square pointer brown"></i>
+      </div>
+    </div>
+    <div class="header-item">
+      <img class="user-logo pointer"
+           src="https://image.flaticon.com/icons/svg/306/306473.svg"
+           alt="Task Manager - User">
+    </div>
+  </div>
+</header>

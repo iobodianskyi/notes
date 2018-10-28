@@ -1,15 +1,29 @@
 
 // common
 
-// colors
+$header-height: 60px
+$box-shadow: 0 0px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+$background-gray: #f8f9fb
+$gray: #6d7e8e
+$teal: #009688
+$blue: #2196f3
+$deep-orange: #ff5722
+$amber: #ffc107
+$brown: #795548
+$transition: .15s ease-in-out
+$radius: 10px
+
+body
+  background-color: $background-gray
+  color: $gray
 
 .app-btn
   width: 150px
   padding: 5px
   font-size: 12px
   border: 1px solid transparent
-  border-radius: .25rem
-  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out
+  border-radius: $radius
+  transition: $transition
   outline: 0 !important
   user-select: none
   cursor: pointer
@@ -22,15 +36,42 @@
     background-color: #6284f3
   
   i.fa
-      float: left
-      line-height: 15px 
+    float: left
+    line-height: 15px 
 
   &.primary:hover
     background-color: #3e68f0
 
+.animated
+  transition: $transition
+  
+.pointer
+  cursor: pointer
+
+.no-select, img
+  user-select: none
+
+.teal
+  color: $teal
+
+.blue
+  color: $blue
+
+.deep-orange
+  color: $deep-orange
+
+.amber
+  color: $amber
+
+.amber
+  color: $amber
+
+.brown
+  color: $brown
+
 // pages
 
-// home
+// login
 .home-background
   height: 100vh
   background: url('assets/img/home-background.jpg') center center no-repeat
@@ -39,10 +80,9 @@
 
   .content
     height: 100vh
-    color: #5d5c5c
 
-    .home-logo
-      width: 60px
+    .login-logo
+      font-size: 70px
       margin-bottom: 30px
 
     .main-title
@@ -59,13 +99,85 @@
     .login-container
       max-width: 300px
       padding: 20px
-      border-radius: 15px
+      border-radius: $radius
       box-shadow: 0 0px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
 
       .sing-text
         margin-bottom: 20px
         font-size: 12px
 
+// header
+
+header
+  position: fixed
+  top: 12px
+  right: 12px
+  left: 12px
+  height: $header-height
+  background-color: #fff
+  box-shadow: $box-shadow
+  border-radius: $radius
+
+  .header-item
+    margin-left: 10px
+    margin-right: 10px
+
+    &:first-child
+      margin-left: 20px
+
+    &:last-child
+      margin-right: 20px
+
+    .nested-item
+      margin-left: 10px
+      margin-right: 10px
+
+      &:first-child
+        margin-left: 0
+
+      &:last-child
+        margin-right: 0
+
+  .icon
+    font-size: 25px
+    line-height: $header-height
+
+    &.collapsed
+      transform: rotate(90deg)
+
+  .logo
+    font-size: 40px
+
+  .logo-title
+    white-space: nowrap
+
+  .search-container
+    border: 1px solid #ced4da
+    border-radius: $radius
+    
+    &:focus-within
+      box-shadow: $box-shadow
+
+    label
+      margin: 0
+
+      i
+        padding: 10px
+        font-size: 18px
+
+    input
+      border: 0 !important
+      border-radius: $radius
+      box-shadow: none !important
+
+  .fa-square
+    margin: 0 5px
+    font-size: 20px
+
+  .user-logo
+    width: 35px
+    height: 35px
+    border-radius: 50%
 
 // media
 
@@ -74,8 +186,8 @@
   .home-background .content .main-title
     font-size: 30px
 
-  .home-background .content .home-logo
-    width: 40px
+  .home-background .content .login-logo
+    font-size: 50px
     margin-bottom: 0
 
 // // Small devices (landscape phones, 576px and up)
