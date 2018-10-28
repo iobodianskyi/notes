@@ -12,6 +12,8 @@ import { CompletedComponent } from './home/completed/completed.component';
 import { TrashComponent } from './home/trash/trash.component';
 import { SettingsComponent } from './home/settings/settings.component';
 import { AboutComponent } from './home/about/about.component';
+import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { AboutComponent } from './home/about/about.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [],
   bootstrap: [AppComponent]
