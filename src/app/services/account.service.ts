@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
+import { User } from 'firebase';
+import { AppUser } from '../models/user';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
-  user: firebase.User;
+  user: AppUser;
 
   constructor(
     private router: Router,
-    private firebaseAuth: AngularFireAuth) {
+    private firebaseAuth: AngularFireAuth,
+    private firebaseStore: AngularFirestore) {
     this.setDefaults();
   }
 
@@ -16,12 +20,32 @@ export class AccountService {
     this.user = null;
   }
 
-  setUser(user) {
-    this.user = user;
+  login(provider) {
+    return this.firebaseAuth.auth.signInWithPopup(provider)
+      .then((credential: firebase.auth.UserCredential) => {
+        this.updateAppUser(credential.user)
+      });
   }
 
-  login(provider) {
-    return this.firebaseAuth.auth.signInWithPopup(provider);
+  isLoggedIn(): boolean {
+    return this.user !== null;
+  }
+
+  updateAppUser(user: User) {
+    const usersDoc: AngularFirestoreDocument<AppUser> = this.firebaseStore.doc('users/' + user.uid);
+    const updateUser: AppUser = {
+      id: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoUrl: user.photoURL
+    };
+
+    this.user = updateUser;
+
+    usersDoc.set(updateUser, { merge: true })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   logout() {
@@ -33,9 +57,5 @@ export class AccountService {
       .catch((error) => {
         console.log(error);
       });
-  }
-
-  isLoggedIn(): boolean {
-    return this.user !== null;
   }
 }

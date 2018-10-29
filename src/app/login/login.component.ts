@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.userSubscription = this.firebaseAuth.authState
       .subscribe((user: firebase.User) => {
         if (user) {
-          this.account.setUser(user);
           this.router.navigate(['/tasks']);
         }
       })
