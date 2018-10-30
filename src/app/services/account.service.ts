@@ -1,4 +1,4 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
@@ -13,7 +13,6 @@ export class AccountService {
 
   constructor(
     private router: Router,
-    private ngZone: NgZone,
     private firebaseAuth: AngularFireAuth,
     private firebaseStore: AngularFirestore) {
 
@@ -25,6 +24,10 @@ export class AccountService {
           return of(null);
         }
       }));
+
+    this.user.subscribe((user) => {
+      if (!user) this.router.navigate(['/']);
+    });
   }
 
   getUser(): Observable<AppUser | null> {
@@ -35,7 +38,6 @@ export class AccountService {
     return this.firebaseAuth.auth.signInWithPopup(provider)
       .then((credential: firebase.auth.UserCredential) => {
         this.updateAppUser(credential.user);
-        this.ngZone.run(() => this.router.navigate(['/tasks']));
       })
   }
 
