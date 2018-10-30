@@ -1,38 +1,46 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
 import { User } from 'firebase';
 import { AppUser } from '../models/user';
+import { Observable, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
-  user: AppUser;
+  user: Observable<AppUser | null>;
 
   constructor(
     private router: Router,
+    private ngZone: NgZone,
     private firebaseAuth: AngularFireAuth,
     private firebaseStore: AngularFirestore) {
-    this.setDefaults();
+
+    this.user = this.firebaseAuth.authState
+      .pipe(switchMap(user => {
+        if (user) {
+          return this.firebaseStore.doc<AppUser>('users/' + user.uid).valueChanges();
+        } else {
+          return of(null);
+        }
+      }));
   }
 
-  setDefaults() {
-    this.user = null;
+  getUser(): Observable<AppUser | null> {
+    return this.user;
   }
 
   login(provider) {
     return this.firebaseAuth.auth.signInWithPopup(provider)
       .then((credential: firebase.auth.UserCredential) => {
-        this.updateAppUser(credential.user)
-      });
-  }
-
-  isLoggedIn(): boolean {
-    return this.user !== null;
+        this.updateAppUser(credential.user);
+        this.ngZone.run(() => this.router.navigate(['/tasks']));
+      })
   }
 
   updateAppUser(user: User) {
-    const usersDoc: AngularFirestoreDocument<AppUser> = this.firebaseStore.doc('users/' + user.uid);
+    const userDocument: AngularFirestoreDocument<AppUser> = this.firebaseStore.doc('users/' + user.uid);
     const updateUser: AppUser = {
       id: user.uid,
       email: user.email,
@@ -40,9 +48,7 @@ export class AccountService {
       photoUrl: user.photoURL
     };
 
-    this.user = updateUser;
-
-    usersDoc.set(updateUser, { merge: true })
+    userDocument.set(updateUser, { merge: true })
       .catch((error) => {
         console.log(error);
       });
@@ -50,12 +56,11 @@ export class AccountService {
 
   logout() {
     this.firebaseAuth.auth.signOut()
-      .then(() => {
-        this.setDefaults();
-        this.router.navigate(['/']);
-      })
       .catch((error) => {
         console.log(error);
+      })
+      .finally(() => {
+        this.router.navigate(['/']);
       });
   }
 }

@@ -1,27 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { Component, OnInit } from '@angular/core';
 import { auth } from 'firebase/app';
-import { Subscription } from 'rxjs';
 import { AccountService } from '../services/account.service';
 
 @Component({ templateUrl: './login.component.html' })
-export class LoginComponent implements OnInit, OnDestroy {
-  userSubscription: Subscription;
+export class LoginComponent implements OnInit {
+  constructor(private account: AccountService) { }
 
-  constructor(
-    private router: Router,
-    private firebaseAuth: AngularFireAuth,
-    private account: AccountService) { }
-
-  ngOnInit() {
-    this.userSubscription = this.firebaseAuth.authState
-      .subscribe((user: firebase.User) => {
-        if (user) {
-          this.router.navigate(['/tasks']);
-        }
-      })
-  }
+  ngOnInit() { }
 
   connectWithFacebook() {
     let facebookProvider = new auth.FacebookAuthProvider();
@@ -37,9 +22,5 @@ export class LoginComponent implements OnInit, OnDestroy {
       .catch((error) => {
         console.log(error)
       });
-  }
-
-  ngOnDestroy() {
-    this.userSubscription.unsubscribe();
   }
 }

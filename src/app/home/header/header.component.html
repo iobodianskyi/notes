@@ -30,10 +30,12 @@
         <i class="fa fa-square pointer brown"></i>
       </div>
     </div>
-    <div class="header-item">
+    <div class="header-item d-flex flex-row flex-nowrap align-items-center">
+      <span class="nested-item" *ngIf="user" [innerHTML]="user.displayName"></span>
       <img class="user-logo pointer"
-           src="https://image.flaticon.com/icons/svg/306/306473.svg"
-           alt="Task Manager - User">
+           [src]="user.photoUrl"
+           alt="Task Manager - User"
+           *ngIf="user">
     </div>
   </div>
 </header>
