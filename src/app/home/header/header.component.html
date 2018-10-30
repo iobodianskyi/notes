@@ -6,10 +6,12 @@
            [ngClass]="menuCollapsed ? 'collapsed' : ''"
            (click)="menuCollapsed = !menuCollapsed"></i>
       </div>
-      <a class="nested-item" routerLink="/tasks">
+      <a class="nested-item"
+         routerLink="/tasks">
         <i class="logo fa fa-list-alt"></i>
       </a>
-      <a class="nested-item logo-title no-select" routerLink="/tasks">Task Manager</a>
+      <a class="nested-item logo-title no-select"
+         routerLink="/tasks">Task Manager</a>
     </div>
 
     <div class="header-item d-flex flex-row flex-nowrap align-items-center">
@@ -31,7 +33,9 @@
       </div>
     </div>
     <div class="header-item d-flex flex-row flex-nowrap align-items-center">
-      <span class="nested-item" *ngIf="user" [innerHTML]="user.displayName"></span>
+      <span class="nested-item"
+            *ngIf="user"
+            [innerHTML]="user.displayName"></span>
       <img class="user-logo pointer"
            [src]="user.photoUrl"
            alt="Task Manager - User"
