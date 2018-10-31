@@ -1,13 +1,22 @@
-<div *ngIf="tasks$ | async as tasks; else loading">
+<div class="h-100"
+     *ngIf="tasks$ | async as tasks; else loading">
   <div *ngIf="tasks.length; else emptyList">
     <div *ngFor="let task of tasks">
       <div>{{task | json}}</div>
     </div>
   </div>
   <ng-template #emptyList>
-    no tasks
+    <div class="h-100 d-flex justify-content-center align-items-center">
+      <div class="boxed first-one">
+        <div class="loader no-select text-center">Start by creating first one!</div>
+      </div>
+    </div>
   </ng-template>
 </div>
 <ng-template #loading>
-  loading...
+  <div class="h-100 d-flex justify-content-center align-items-center">
+    <div class="boxed first-one">
+      <div class="loader no-select text-center">Loading...</div>
+    </div>
+  </div>
 </ng-template>
