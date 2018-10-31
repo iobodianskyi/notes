@@ -3,13 +3,15 @@ import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from
 import { AccountService } from './account.service';
 import { Observable } from 'rxjs';
 import { tap, map, take } from 'rxjs/operators';
+import { UtilsService } from './utils.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
 
   constructor(
     private account: AccountService,
-    private router: Router) { }
+    private router: Router,
+    private utils: UtilsService) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -20,7 +22,7 @@ export class AuthGuard implements CanActivate {
         take(1),
         map(user => !!user),
         tap(loggedIn => {
-          if (!loggedIn) this.router.navigate(['/']);
+          if (!loggedIn) this.router.navigate([this.utils.routes.root]);
         })
       )
   }

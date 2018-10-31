@@ -3,13 +3,15 @@ import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from
 import { AccountService } from './account.service';
 import { Observable } from 'rxjs';
 import { tap, map, take } from 'rxjs/operators';
+import { UtilsService } from './utils.service';
 
 @Injectable({ providedIn: 'root' })
 export class LoggedInGuard implements CanActivate {
 
   constructor(
     private account: AccountService,
-    private router: Router) { }
+    private router: Router,
+    private utils: UtilsService) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -20,7 +22,7 @@ export class LoggedInGuard implements CanActivate {
         take(1),
         map(user => !(!!user)),
         tap(notLoggedIn => {
-          if (!notLoggedIn) this.router.navigate(['/tasks']);
+          if (!notLoggedIn) this.router.navigate([this.utils.routes.tasks]);
         })
       )
   }

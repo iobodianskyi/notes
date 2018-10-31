@@ -6,6 +6,7 @@ import { User } from 'firebase';
 import { AppUser } from '../models/user';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { UtilsService } from './utils.service';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -14,19 +15,20 @@ export class AccountService {
   constructor(
     private router: Router,
     private firebaseAuth: AngularFireAuth,
-    private firebaseStore: AngularFirestore) {
+    private firebaseStore: AngularFirestore,
+    private utils: UtilsService) {
 
     this.user = this.firebaseAuth.authState
       .pipe(switchMap(user => {
         if (user) {
-          return this.firebaseStore.doc<AppUser>('users/' + user.uid).valueChanges();
+          return this.firebaseStore.doc<AppUser>(this.utils.db.users(user.uid)).valueChanges();
         } else {
           return of(null);
         }
       }));
 
     this.user.subscribe((user) => {
-      if (!user) this.router.navigate(['/']);
+      if (!user) this.router.navigate([this.utils.routes.root]);
     });
   }
 
@@ -42,7 +44,9 @@ export class AccountService {
   }
 
   updateAppUser(user: User) {
-    const userDocument: AngularFirestoreDocument<AppUser> = this.firebaseStore.doc('users/' + user.uid);
+    const userDocument: AngularFirestoreDocument<AppUser> =
+      this.firebaseStore.doc(this.utils.db.users(user.uid));
+      
     const updateUser: AppUser = {
       id: user.uid,
       email: user.email,
@@ -62,7 +66,7 @@ export class AccountService {
         console.log(error);
       })
       .finally(() => {
-        this.router.navigate(['/']);
+        this.router.navigate([this.utils.routes.root]);
       });
   }
 }
