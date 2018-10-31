@@ -8,7 +8,10 @@ export class UtilsService {
   };
 
   db = {
-    users: (userId: string): string => { return 'users/' + userId }
+    users: (): string => { return 'users/' },
+    user: (userId: string): string => { return this.db.users() + userId },
+    tasks: (): string => { return 'tasks/' },
+    task: (taskId: string): string => { return this.db.tasks() + taskId }
   };
 
   constructor() { }

@@ -1,0 +1,13 @@
+<div *ngIf="tasks$ | async as tasks; else loading">
+  <div *ngIf="tasks.length; else emptyList">
+    <div *ngFor="let task of tasks">
+      <div>{{task | json}}</div>
+    </div>
+  </div>
+  <ng-template #emptyList>
+    no tasks
+  </ng-template>
+</div>
+<ng-template #loading>
+  loading...
+</ng-template>

@@ -21,7 +21,7 @@ export class AccountService {
     this.user = this.firebaseAuth.authState
       .pipe(switchMap(user => {
         if (user) {
-          return this.firebaseStore.doc<AppUser>(this.utils.db.users(user.uid)).valueChanges();
+          return this.firebaseStore.doc<AppUser>(this.utils.db.user(user.uid)).valueChanges();
         } else {
           return of(null);
         }
@@ -45,7 +45,7 @@ export class AccountService {
 
   updateAppUser(user: User) {
     const userDocument: AngularFirestoreDocument<AppUser> =
-      this.firebaseStore.doc(this.utils.db.users(user.uid));
+      this.firebaseStore.doc(this.utils.db.user(user.uid));
       
     const updateUser: AppUser = {
       id: user.uid,
