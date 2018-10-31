@@ -7,11 +7,13 @@ import { CompletedComponent } from './home/completed/completed.component';
 import { TrashComponent } from './home/trash/trash.component';
 import { SettingsComponent } from './home/settings/settings.component';
 import { AboutComponent } from './home/about/about.component';
+import { AuthGuard } from './services/auth.guard';
+import { LoggedInGuard } from './services/loggedin.guard';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent, pathMatch: 'full' },
+  { path: '', component: LoginComponent, pathMatch: 'full', canActivate: [LoggedInGuard] },
   {
-    path: '', component: HomeComponent, children: [
+    path: '', component: HomeComponent, canActivate: [AuthGuard], children: [
       { path: 'tasks', component: TasksComponent },
       { path: 'completed', component: CompletedComponent },
       { path: 'trash', component: TrashComponent },
