@@ -4,7 +4,7 @@ import { Task } from '../models/task';
 import { UtilsService } from './utils.service';
 import { Observable } from 'rxjs';
 import { AccountService } from './account.service';
-import { first, switchMap, map } from 'rxjs/operators';
+import { first, switchMap, map, tap } from 'rxjs/operators';
 import { AppUser } from '../models/user';
 
 @Injectable({ providedIn: 'root' })
@@ -21,10 +21,9 @@ export class TaskService {
     return this.account.getUser()
       .pipe(first(),
         switchMap((user) => {
-          const userPath = this.utils.db.user(user.id);
-          const tasksPath = this.utils.db.tasks();
-          this.taskCollection = this.firebaseStore.doc<AppUser>(userPath)
-            .collection<Task>(tasksPath, ref => ref.orderBy(this.utils.db.fields.created, 'desc'));
+          const tasksPath = this.utils.db.tasks(user.id);
+          this.taskCollection = this.firebaseStore.collection<Task>(
+            tasksPath, ref => ref.orderBy(this.utils.db.fields.created, 'desc'));
 
           return this.taskCollection.snapshotChanges().pipe(
             map(changeActions => {
@@ -39,5 +38,18 @@ export class TaskService {
 
   create(task: Task) {
     return this.taskCollection.add(task);
+  }
+
+  update(task: Task) {
+    return this.account.getUser()
+      .pipe(first()).subscribe((user) => {
+        const taskPath = this.utils.db.task(task.id, user.id);
+
+        return this.firebaseStore.doc<Task>(taskPath)
+          .set(task, { merge: true })
+          .catch((error) => {
+            console.log(error);
+          });
+      });
   }
 }
