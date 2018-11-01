@@ -11,7 +11,10 @@ export class UtilsService {
     users: (): string => { return 'users/' },
     user: (userId: string): string => { return this.db.users() + userId },
     tasks: (): string => { return 'tasks/' },
-    task: (taskId: string): string => { return this.db.tasks() + taskId }
+    task: (taskId: string): string => { return this.db.tasks() + taskId },
+    fields: {
+      created: 'created'
+    }
   };
 
   constructor() { }

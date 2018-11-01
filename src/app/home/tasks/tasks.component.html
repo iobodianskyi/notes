@@ -5,7 +5,7 @@
          [ngClass]="{'focused': focused}">
       <div class="editable no-outline text-left"
            contenteditable="true"
-           placeholder="Note..."
+           placeholder="New task..."
            (focus)="focused = true"
            (focusout)="focusOut($event.target); focused = fasle"></div>
     </div>

@@ -23,7 +23,9 @@ export class TaskService {
         switchMap((user) => {
           const userPath = this.utils.db.user(user.id);
           const tasksPath = this.utils.db.tasks();
-          this.taskCollection = this.firebaseStore.doc<AppUser>(userPath).collection<Task>(tasksPath);
+          this.taskCollection = this.firebaseStore.doc<AppUser>(userPath)
+            .collection<Task>(tasksPath, ref => ref.orderBy(this.utils.db.fields.created, 'desc'));
+
           return this.taskCollection.snapshotChanges().pipe(
             map(changeActions => {
               return changeActions.map(changeAction => {
