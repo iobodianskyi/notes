@@ -16,6 +16,7 @@ import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { TaskComponent } from './home/tasks/task/task.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     CompletedComponent,
     TrashComponent,
     SettingsComponent,
-    AboutComponent
+    AboutComponent,
+    TaskComponent
   ],
   imports: [
     BrowserModule,

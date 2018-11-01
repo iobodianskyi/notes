@@ -22,7 +22,7 @@ export class TasksComponent implements OnInit {
       this.taskService.create(<Task>{ note: editElement.textContent, created: new Date() })
         .catch(console.log);
 
-      editElement.textContent = ''
+      editElement.textContent = '';
     }
   }
 }
