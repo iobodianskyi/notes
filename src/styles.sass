@@ -3,8 +3,10 @@
 
 $header-height: 60px
 $offset: 15px
+$content-padding: 20px
 $sidebar-width: 250px
-$box-shadow: 0 0px 3px rgba(0, 0, 0, 0.16), 0 1px 4px rgba(0, 0, 0, 0.23)
+$box-shadow: 0 0px 1px rgba(0, 0, 0, 0.16), 0 0px 2px rgba(0, 0, 0, 0.23)
+$box-shadow-focused: 0 0px 10px rgba(0, 0, 0, 0.16), 0 1px 10px rgba(0, 0, 0, 0.23)
 $background-gray: #f8f9fb
 $gray: #6d7e8e
 $teal: #009688
@@ -68,6 +70,9 @@ a
 .no-select, img
   user-select: none
 
+.no-outline
+  outline: none
+
 .teal
   color: $teal
 
@@ -115,12 +120,12 @@ a
 
     .login-container
       max-width: 300px
-      padding: 20px
+      padding: $content-padding
       border-radius: $radius
       box-shadow: 0 0px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
 
       .sing-text
-        margin-bottom: 20px
+        margin-bottom: $content-padding
         font-size: 12px
 
 // header
@@ -136,10 +141,10 @@ header
     margin-right: 10px
 
     &:first-child
-      margin-left: 20px
+      margin-left: $content-padding
 
     &:last-child
-      margin-right: 20px
+      margin-right: $content-padding
 
     .nested-item
       margin-left: 10px
@@ -216,13 +221,13 @@ header
       font-weight: bold
   
     .fa
-      margin: 0 20px
+      margin: 0 $content-padding
 
     .fa-sign-out
       transform: rotate(180deg)
 
     hr
-      margin: 10px 20px 0px 20px
+      margin: 10px $content-padding 0px $content-padding
 
 // home-content
 
@@ -233,11 +238,36 @@ header
   bottom: $offset
   left: ($sidebar-width + $offset * 2)
 
+// components shared
+
+.task-box
+  width: 300px
+  max-height: 150px
+  transition: $transition
+  overflow-y: auto
+
+  &.focused
+    box-shadow: $box-shadow-focused
+
+  .editable
+    padding: 10px
+    cursor: text
+
+    &:empty:before
+      content: attr(placeholder)
+      display: block
+
+.main-content
+  padding: $content-padding
+  overflow-y: auto
 
 // tasks
 
-.first-one
+.no-one-box
   padding: 30px
+
+.create-box
+  margin: 0 auto
 
 .loader
   color: #adacac;

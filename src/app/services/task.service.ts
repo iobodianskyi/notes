@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Task } from '../models/task';
 import { UtilsService } from './utils.service';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { AccountService } from './account.service';
-import { first, switchMap } from 'rxjs/operators';
+import { first, switchMap, map } from 'rxjs/operators';
 import { AppUser } from '../models/user';
 
 @Injectable({ providedIn: 'root' })
@@ -24,7 +24,18 @@ export class TaskService {
           const userPath = this.utils.db.user(user.id);
           const tasksPath = this.utils.db.tasks();
           this.taskCollection = this.firebaseStore.doc<AppUser>(userPath).collection<Task>(tasksPath);
-          return this.taskCollection.valueChanges();
+          return this.taskCollection.snapshotChanges().pipe(
+            map(changeActions => {
+              return changeActions.map(changeAction => {
+                const data = changeAction.payload.doc.data();
+                return <Task>{ id: changeAction.payload.doc.id, ...data };
+              })
+            })
+          );
         }));
+  }
+
+  create(task: Task) {
+    return this.taskCollection.add(task);
   }
 }
