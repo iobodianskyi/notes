@@ -4,5 +4,6 @@ export class Task {
   created: Date;
   edited: Date;
   color: string;
+  completed: boolean;
   trashed: boolean;
 }

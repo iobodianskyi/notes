@@ -21,6 +21,7 @@ export class TaskService {
         ref => {
           let query = ref
             .where(this.utils.db.fields.trashed, '==', false)
+            .where(this.utils.db.fields.completed, '==', false)
             .orderBy(this.utils.db.fields.created, 'desc');
 
           return query;
@@ -36,7 +37,13 @@ export class TaskService {
 
   create(note: string) {
     const date = new Date();
-    const task = <Task>{ note: note, created: date, edited: date, trashed: false };
+    const task = <Task>{
+      note: note,
+      created: date,
+      edited: date,
+      completed: false,
+      trashed: false
+    };
 
     return this.getTaskCollection().add(task);
   }
