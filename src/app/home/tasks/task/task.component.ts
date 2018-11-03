@@ -30,4 +30,9 @@ export class TaskComponent implements OnInit {
     this.task.color = color;
     this.taskService.update(this.task);
   }
+
+  complete() {
+    this.task.completed = true;
+    this.taskService.update(this.task);
+  }
 }
