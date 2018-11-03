@@ -48,13 +48,22 @@
       <div ngbDropdownMenu>
         <button class="dropdown-item"
                 *ngIf="!task.trashed"
-                (click)="moveToTrash()">Delete</button>
+                (click)="moveToTrash()">
+          <i class="fa fa-trash-o pointer"></i>
+          Delete
+        </button>
         <button class="dropdown-item"
                 *ngIf="task.trashed"
-                (click)="restore()">Restore</button>
+                (click)="restore()">
+          <i class="fa fa-undo pointer"></i>
+          Restore
+        </button>
         <button class="dropdown-item"
                 *ngIf="task.trashed"
-                (click)="delete()">Delete forever</button>
+                (click)="delete()">
+          <i class="fa fa-trash-o pointer"></i>
+          Delete forever
+        </button>
       </div>
     </div>
   </div>
