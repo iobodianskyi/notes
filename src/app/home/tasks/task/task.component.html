@@ -1,5 +1,6 @@
 <div class="boxed task-box"
-     [ngClass]="{'focused': focused}">
+     [ngClass]="{'focused': focused}"
+     [class]="task.color">
   <div class="edit-box">
     <div class="editable no-outline text-left"
          contenteditable="true"
@@ -16,10 +17,33 @@
          class="d-inline-block">
       <button class="btn p-0 no-outline"
               ngbDropdownToggle>
+        <i class="fa fa-square-o pointer"></i>
+      </button>
+      <div ngbDropdownMenu>
+        <div class="d-flex flex-row flex-nowrap align-items-center justify-content-center">
+          <i class="fa fa-square pointer teal"
+             (click)="setColor('teal')"></i>
+          <i class="fa fa-square pointer blue"
+             (click)="setColor('blue')"></i>
+          <i class="fa fa-square pointer deep-orange"
+             (click)="setColor('deep-orange')"></i>
+          <i class="fa fa-square pointer amber"
+             (click)="setColor('amber')"></i>
+          <i class="fa fa-square pointer brown"
+             (click)="setColor('brown')"></i>
+        </div>
+      </div>
+    </div>
+    <div ngbDropdown
+         placement="bottom-center"
+         class="d-inline-block">
+      <button class="btn p-0 no-outline"
+              ngbDropdownToggle>
         <i class="options-icon pointer fa fa-ellipsis-h"></i>
       </button>
       <div ngbDropdownMenu>
-        <button class="dropdown-item" (click)="delete()">Delete</button>
+        <button class="dropdown-item"
+                (click)="delete()">Delete</button>
       </div>
     </div>
   </div>

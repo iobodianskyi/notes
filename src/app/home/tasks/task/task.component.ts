@@ -25,4 +25,9 @@ export class TaskComponent implements OnInit {
   delete() {
     this.taskService.delete(this.task.id);
   }
+
+  setColor(color: string) {
+    this.task.color = color;
+    this.taskService.update(this.task);
+  }
 }
