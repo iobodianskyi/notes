@@ -12,7 +12,8 @@
   </div>
   <hr>
   <div class="options-box d-flex flex-row flex-nowrap align-items-center">
-    <button class="btn p-0 no-outline" (click)="complete()">
+    <button class="btn p-0 no-outline"
+            (click)="complete()">
       <i class="pointer fa fa-check-square-o"></i>
     </button>
     <div ngbDropdown
@@ -46,7 +47,11 @@
       </button>
       <div ngbDropdownMenu>
         <button class="dropdown-item"
+                *ngIf="!task.trashed"
                 (click)="moveToTrash()">Delete</button>
+        <button class="dropdown-item"
+                *ngIf="task.trashed"
+                (click)="delete()">Delete forever</button>
       </div>
     </div>
   </div>

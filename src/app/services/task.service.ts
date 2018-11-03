@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, DocumentChangeAction } from '@angular/fire/firestore';
 import { Task } from '../models/task';
 import { UtilsService } from './utils.service';
 import { Observable } from 'rxjs';
@@ -16,23 +16,20 @@ export class TaskService {
   getAll(): Observable<Task[]> {
     const userId = this.account.getUser().uid;
     const tasksPath = this.utils.db.tasks(userId);
-    return this.firebaseStore
-      .collection<Task>(tasksPath,
-        ref => {
-          let query = ref
-            .where(this.utils.db.fields.trashed, '==', false)
-            .where(this.utils.db.fields.completed, '==', false)
-            .orderBy(this.utils.db.fields.created, 'desc');
 
-          return query;
-        }).snapshotChanges().pipe(
-          map(changeActions => {
-            return changeActions.map(changeAction => {
-              const data = changeAction.payload.doc.data();
-              return <Task>{ id: changeAction.payload.doc.id, ...data };
-            })
-          })
-        );
+    return this.firebaseStore
+      .collection<Task>(tasksPath, this.queryTasks())
+      .snapshotChanges()
+      .pipe(this.mapTaskChanges());
+  }
+
+  getCompleted() {
+    const userId = this.account.getUser().uid;
+    const tasksPath = this.utils.db.tasks(userId);
+    return this.firebaseStore
+      .collection<Task>(tasksPath, this.queryCompleted())
+      .snapshotChanges()
+      .pipe(this.mapTaskChanges());
   }
 
   create(note: string) {
@@ -63,6 +60,37 @@ export class TaskService {
   delete(taskId) {
     this.getTaskDocument(taskId)
       .delete();
+  }
+
+  private queryTasks() {
+    return (ref: firebase.firestore.CollectionReference) => {
+      let query = ref
+        .where(this.utils.db.fields.trashed, '==', false)
+        .where(this.utils.db.fields.completed, '==', false)
+        .orderBy(this.utils.db.fields.created, 'desc');
+
+      return query;
+    }
+  }
+
+  private queryCompleted() {
+    return (ref: firebase.firestore.CollectionReference) => {
+      let query = ref
+        .where(this.utils.db.fields.trashed, '==', false)
+        .where(this.utils.db.fields.completed, '==', true)
+        .orderBy(this.utils.db.fields.created, 'desc');
+
+      return query;
+    }
+  }
+
+  private mapTaskChanges() {
+    return map((changeActions: DocumentChangeAction<Task>[]) => {
+      return changeActions.map(changeAction => {
+        const data = changeAction.payload.doc.data();
+        return <Task>{ id: changeAction.payload.doc.id, ...data };
+      })
+    })
   }
 
   private getTaskCollection(): AngularFirestoreCollection<Task> {

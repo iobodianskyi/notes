@@ -1,6 +1,7 @@
 <div id="tasks"
      class="main-content h-100">
-  <div class="m-auto create-box">
+  <div class="m-auto create-box"
+       *ngIf="tasks$ | async; else loading">
     <div class="boxed task-box"
          [ngClass]="{'focused': focused}">
       <div class="editable no-outline text-left"

@@ -26,13 +26,17 @@ export class TaskComponent implements OnInit {
     this.taskService.moveToTrash(this.task);
   }
 
+  delete() {
+    this.taskService.delete(this.task.id);
+  }
+
   setColor(color: string) {
     this.task.color = color;
     this.taskService.update(this.task);
   }
 
   complete() {
-    this.task.completed = true;
+    this.task.completed = !this.task.completed;
     this.taskService.update(this.task);
   }
 }
