@@ -51,6 +51,9 @@
                 (click)="moveToTrash()">Delete</button>
         <button class="dropdown-item"
                 *ngIf="task.trashed"
+                (click)="restore()">Restore</button>
+        <button class="dropdown-item"
+                *ngIf="task.trashed"
                 (click)="delete()">Delete forever</button>
       </div>
     </div>

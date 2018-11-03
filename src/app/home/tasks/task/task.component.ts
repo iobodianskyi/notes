@@ -39,4 +39,9 @@ export class TaskComponent implements OnInit {
     this.task.completed = !this.task.completed;
     this.taskService.update(this.task);
   }
+
+  restore() {
+    this.task.trashed = false;
+    this.taskService.update(this.task);
+  }
 }
