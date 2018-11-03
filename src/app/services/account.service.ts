@@ -5,35 +5,36 @@ import { AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firest
 import { User } from 'firebase';
 import { AppUser } from '../models/user';
 import { Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
 import { UtilsService } from './utils.service';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
-  user: Observable<AppUser | null>;
-
   constructor(
     private router: Router,
     private firebaseAuth: AngularFireAuth,
     private firebaseStore: AngularFirestore,
     private utils: UtilsService) {
-
-    this.user = this.firebaseAuth.authState
-      .pipe(switchMap(user => {
-        if (user) {
-          return this.firebaseStore.doc<AppUser>(this.utils.db.user(user.uid)).valueChanges();
-        } else {
-          return of(null);
-        }
-      }));
-
-    this.user.subscribe((user) => {
-      if (!user) this.router.navigate([this.utils.routes.root]);
-    });
+    this.firebaseAuth.authState
+      .subscribe((user) => {
+        if (!user) this.router.navigate([this.utils.routes.root]);
+      });
   }
 
-  getUser(): Observable<AppUser | null> {
-    return this.user;
+  getAppUser(): Observable<AppUser> {
+    const user = this.getUser();
+    if (user) {
+      return this.firebaseStore.doc<AppUser>(this.utils.db.user(user.uid)).valueChanges();
+    } else {
+      return of(null);
+    }
+  }
+
+  getAuthState(): Observable<User> {
+    return this.firebaseAuth.authState;
+  }
+
+  getUser(): User {
+    return this.firebaseAuth.auth.currentUser;
   }
 
   login(provider) {
@@ -46,7 +47,7 @@ export class AccountService {
   updateAppUser(user: User) {
     const userDocument: AngularFirestoreDocument<AppUser> =
       this.firebaseStore.doc(this.utils.db.user(user.uid));
-      
+
     const updateUser: AppUser = {
       id: user.uid,
       email: user.email,

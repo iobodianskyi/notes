@@ -2,24 +2,21 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { auth } from 'firebase/app';
 import { AccountService } from '../services/account.service';
 import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
 import { UtilsService } from '../services/utils.service';
+import { Router } from '@angular/router';
 
 @Component({ templateUrl: './login.component.html' })
 export class LoginComponent implements OnInit, OnDestroy {
-  user$: Subscription;
-
+  private login$: Subscription;
   constructor(
     private router: Router,
     private account: AccountService,
     private utils: UtilsService) { }
 
   ngOnInit() {
-    this.user$ = this.account.getUser()
-      .subscribe(user => {
-        if (user) {
-          this.router.navigate([this.utils.routes.tasks]);
-        }
+    this.login$ = this.account.getAuthState()
+      .subscribe((user) => {
+        if (user) this.router.navigate([this.utils.routes.tasks]);
       });
   }
 
@@ -40,6 +37,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.user$.unsubscribe();
+    this.login$.unsubscribe();
   }
 }

@@ -4,8 +4,7 @@ import { Task } from '../models/task';
 import { UtilsService } from './utils.service';
 import { Observable } from 'rxjs';
 import { AccountService } from './account.service';
-import { first, switchMap, map, tap } from 'rxjs/operators';
-import { AppUser } from '../models/user';
+import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class TaskService {
@@ -18,22 +17,19 @@ export class TaskService {
   }
 
   getAll(): Observable<Task[]> {
-    return this.account.getUser()
-      .pipe(first(),
-        switchMap((user) => {
-          const tasksPath = this.utils.db.tasks(user.id);
-          this.taskCollection = this.firebaseStore.collection<Task>(
-            tasksPath, ref => ref.orderBy(this.utils.db.fields.created, 'desc'));
+    const userId = this.account.getUser().uid;
+    const tasksPath = this.utils.db.tasks(userId);
+    this.taskCollection = this.firebaseStore.collection<Task>(
+      tasksPath, ref => ref.orderBy(this.utils.db.fields.created, 'desc'));
 
-          return this.taskCollection.snapshotChanges().pipe(
-            map(changeActions => {
-              return changeActions.map(changeAction => {
-                const data = changeAction.payload.doc.data();
-                return <Task>{ id: changeAction.payload.doc.id, ...data };
-              })
-            })
-          );
-        }));
+    return this.taskCollection.snapshotChanges().pipe(
+      map(changeActions => {
+        return changeActions.map(changeAction => {
+          const data = changeAction.payload.doc.data();
+          return <Task>{ id: changeAction.payload.doc.id, ...data };
+        })
+      })
+    );
   }
 
   create(task: Task) {
@@ -41,15 +37,13 @@ export class TaskService {
   }
 
   update(task: Task) {
-    return this.account.getUser()
-      .pipe(first()).subscribe((user) => {
-        const taskPath = this.utils.db.task(task.id, user.id);
+    const userId = this.account.getUser().uid;
+    const taskPath = this.utils.db.task(task.id, userId);
 
-        return this.firebaseStore.doc<Task>(taskPath)
-          .set(task, { merge: true })
-          .catch((error) => {
-            console.log(error);
-          });
+    return this.firebaseStore.doc<Task>(taskPath)
+      .set(task, { merge: true })
+      .catch((error) => {
+        console.log(error);
       });
   }
 }

@@ -14,10 +14,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(private account: AccountService) { }
 
   ngOnInit() {
-    this.userSubscribtion = this.account.getUser()
-      .subscribe(user => {
-        this.user = user;
-      });
+    this.userSubscribtion = this.account.getAppUser()
+      .subscribe(user => { this.user = user });
   }
 
   ngOnDestroy() {
