@@ -32,6 +32,15 @@ export class TaskService {
       .pipe(this.mapTaskChanges());
   }
 
+  getTrashed() {
+    const userId = this.account.getUser().uid;
+    const tasksPath = this.utils.db.tasks(userId);
+    return this.firebaseStore
+      .collection<Task>(tasksPath, this.queryTrashed())
+      .snapshotChanges()
+      .pipe(this.mapTaskChanges());
+  }
+
   create(note: string) {
     const date = new Date();
     const task = <Task>{
@@ -78,6 +87,16 @@ export class TaskService {
       let query = ref
         .where(this.utils.db.fields.trashed, '==', false)
         .where(this.utils.db.fields.completed, '==', true)
+        .orderBy(this.utils.db.fields.created, 'desc');
+
+      return query;
+    }
+  }
+
+  private queryTrashed() {
+    return (ref: firebase.firestore.CollectionReference) => {
+      let query = ref
+        .where(this.utils.db.fields.trashed, '==', true)
         .orderBy(this.utils.db.fields.created, 'desc');
 
       return query;
