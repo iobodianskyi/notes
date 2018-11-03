@@ -1,9 +1,26 @@
 <div class="boxed task-box"
      [ngClass]="{'focused': focused}">
-  <div class="editable no-outline text-left"
-       contenteditable="true"
-       placeholder="Note..."
-       [innerHtml]="task.note"
-       (focus)="focused = true"
-       (focusout)="focusOut($event.target); focused = fasle"></div>
+  <div class="edit-box">
+    <div class="editable no-outline text-left"
+         contenteditable="true"
+         placeholder="Note..."
+         [innerHtml]="task.note"
+         (focus)="focused = true"
+         (focusout)="focusOut($event.target); focused = fasle">
+    </div>
+  </div>
+  <hr>
+  <div class="options-box d-flex flex-row flex-nowrap align-items-center">
+    <div ngbDropdown
+         placement="bottom-center"
+         class="d-inline-block">
+      <button class="btn p-0 no-outline"
+              ngbDropdownToggle>
+        <i class="options-icon pointer fa fa-ellipsis-h"></i>
+      </button>
+      <div ngbDropdownMenu>
+        <button class="dropdown-item" (click)="delete()">Delete</button>
+      </div>
+    </div>
+  </div>
 </div>

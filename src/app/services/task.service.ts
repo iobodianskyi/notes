@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Task } from '../models/task';
 import { UtilsService } from './utils.service';
 import { Observable } from 'rxjs';
@@ -38,13 +38,19 @@ export class TaskService {
   }
 
   update(task: Task) {
-    const userId = this.account.getUser().uid;
-    const taskPath = this.utils.db.task(task.id, userId);
+    return this.getTask(task.id)
+      .set(task, { merge: true });
+  }
 
-    return this.firebaseStore.doc<Task>(taskPath)
-      .set(task, { merge: true })
-      .catch((error) => {
-        console.log(error);
-      });
+  delete(taskId) {
+    this.getTask(taskId)
+      .delete();
+  }
+
+  private getTask(taskId: string): AngularFirestoreDocument<Task> {
+    const userId = this.account.getUser().uid;
+    const taskPath = this.utils.db.task(taskId, userId);
+
+    return this.firebaseStore.doc<Task>(taskPath);
   }
 }
