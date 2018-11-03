@@ -3,5 +3,6 @@ export class Task {
   note: string;
   created: Date;
   edited: Date;
-  color: string
+  color: string;
+  trashed: boolean;
 }

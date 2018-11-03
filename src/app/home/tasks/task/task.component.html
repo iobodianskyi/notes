@@ -2,7 +2,7 @@
      [ngClass]="{'focused': focused}"
      [class]="task.color">
   <div class="edit-box">
-    <div class="editable no-outline text-left"
+    <div class="editable no-outline text-left h-100"
          contenteditable="true"
          placeholder="Note..."
          [innerHtml]="task.note"
@@ -43,7 +43,7 @@
       </button>
       <div ngbDropdownMenu>
         <button class="dropdown-item"
-                (click)="delete()">Delete</button>
+                (click)="moveToTrash()">Delete</button>
       </div>
     </div>
   </div>

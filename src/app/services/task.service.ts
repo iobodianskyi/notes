@@ -8,48 +8,64 @@ import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class TaskService {
-  private taskCollection: AngularFirestoreCollection<Task>;
-
   constructor(
     private firebaseStore: AngularFirestore,
     private account: AccountService,
-    private utils: UtilsService) {
-  }
+    private utils: UtilsService) { }
 
   getAll(): Observable<Task[]> {
     const userId = this.account.getUser().uid;
     const tasksPath = this.utils.db.tasks(userId);
-    this.taskCollection = this.firebaseStore.collection<Task>(
-      tasksPath, ref => ref.orderBy(this.utils.db.fields.created, 'desc'));
+    return this.firebaseStore
+      .collection<Task>(tasksPath,
+        ref => {
+          let query = ref
+            .where(this.utils.db.fields.trashed, '==', false)
+            .orderBy(this.utils.db.fields.created, 'desc');
 
-    return this.taskCollection.snapshotChanges().pipe(
-      map(changeActions => {
-        return changeActions.map(changeAction => {
-          const data = changeAction.payload.doc.data();
-          return <Task>{ id: changeAction.payload.doc.id, ...data };
-        })
-      })
-    );
+          return query;
+        }).snapshotChanges().pipe(
+          map(changeActions => {
+            return changeActions.map(changeAction => {
+              const data = changeAction.payload.doc.data();
+              return <Task>{ id: changeAction.payload.doc.id, ...data };
+            })
+          })
+        );
   }
 
   create(note: string) {
     const date = new Date();
-    const task = <Task>{ note: note, created: date, edited: date };
-    return this.taskCollection.add(task);
+    const task = <Task>{ note: note, created: date, edited: date, trashed: false };
+
+    return this.getTaskCollection().add(task);
   }
 
   update(task: Task) {
     task.edited = new Date();
-    return this.getTask(task.id)
+    return this.getTaskDocument(task.id)
+      .set(task, { merge: true });
+  }
+
+  moveToTrash(task: Task) {
+    task.trashed = true;
+    return this.getTaskDocument(task.id)
       .set(task, { merge: true });
   }
 
   delete(taskId) {
-    this.getTask(taskId)
+    this.getTaskDocument(taskId)
       .delete();
   }
 
-  private getTask(taskId: string): AngularFirestoreDocument<Task> {
+  private getTaskCollection(): AngularFirestoreCollection<Task> {
+    const userId = this.account.getUser().uid;
+    const tasksPath = this.utils.db.tasks(userId);
+
+    return this.firebaseStore.collection<Task>(tasksPath);
+  }
+
+  private getTaskDocument(taskId: string): AngularFirestoreDocument<Task> {
     const userId = this.account.getUser().uid;
     const taskPath = this.utils.db.task(taskId, userId);
 

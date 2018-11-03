@@ -22,8 +22,8 @@ export class TaskComponent implements OnInit {
     editedElement.innerHTML = this.task.note;
   }
 
-  delete() {
-    this.taskService.delete(this.task.id);
+  moveToTrash() {
+    this.taskService.moveToTrash(this.task);
   }
 
   setColor(color: string) {

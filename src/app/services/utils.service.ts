@@ -13,7 +13,8 @@ export class UtilsService {
     tasks: (userId: string): string => { return this.db.user(userId) + '/tasks/' },
     task: (taskId: string, userId: string): string => { return this.db.tasks(userId) + taskId },
     fields: {
-      created: 'created'
+      created: 'created',
+      trashed: 'trashed'
     }
   };
 
