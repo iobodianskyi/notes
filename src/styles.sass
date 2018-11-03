@@ -2,11 +2,13 @@
 // common
 
 $header-height: 60px
-$offset: 15px
+$offset: 14px
 $sidebar-width: 250px
-$box-shadow: 0 0px 3px rgba(0, 0, 0, 0.16), 0 1px 4px rgba(0, 0, 0, 0.23)
+$box-shadow: 0 0px 1px rgba(0, 0, 0, 0.16), 0 0px 2px rgba(0, 0, 0, 0.23)
+$box-shadow-focused: 0 0px 10px rgba(0, 0, 0, 0.16), 0 1px 10px rgba(0, 0, 0, 0.23)
 $background-gray: #f8f9fb
 $gray: #6d7e8e
+$placeholder: #afafaf
 $teal: #009688
 $blue: #2196f3
 $deep-orange: #ff5722
@@ -59,6 +61,9 @@ a
   &.primary:hover
     background-color: #3e68f0
 
+input::placeholder
+  color: $placeholder !important
+
 .animated
   transition: $transition
   
@@ -67,6 +72,14 @@ a
 
 .no-select, img
   user-select: none
+
+.no-outline
+  outline: none
+
+.absolute-center
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
 .teal
   color: $teal
@@ -115,12 +128,12 @@ a
 
     .login-container
       max-width: 300px
-      padding: 20px
+      padding: $offset
       border-radius: $radius
       box-shadow: 0 0px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
 
       .sing-text
-        margin-bottom: 20px
+        margin-bottom: $offset
         font-size: 12px
 
 // header
@@ -136,10 +149,10 @@ header
     margin-right: 10px
 
     &:first-child
-      margin-left: 20px
+      margin-left: $offset
 
     &:last-child
-      margin-right: 20px
+      margin-right: $offset
 
     .nested-item
       margin-left: 10px
@@ -216,14 +229,13 @@ header
       font-weight: bold
   
     .fa
-      margin: 0 20px
+      margin: 0 $offset
 
     .fa-sign-out
       transform: rotate(180deg)
 
     hr
-      margin: 10px 20px 0px 20px
-
+      margin: 10px $offset 0px $offset
 
 // home-content
 
@@ -233,6 +245,60 @@ header
   right: $offset
   bottom: $offset
   left: ($sidebar-width + $offset * 2)
+
+// components shared
+
+.task-box
+  max-height: 150px
+  transition: $transition
+  overflow-y: auto
+
+  &.focused
+    box-shadow: $box-shadow-focused
+
+  .editable
+    padding: 10px
+    cursor: text
+
+    &:empty:before
+      content: attr(placeholder)
+      display: block
+      color: $placeholder
+
+.main-content
+  padding: $offset
+  overflow-y: auto
+
+// tasks
+
+#tasks
+  padding: $offset 0
+
+  .container-fluid
+    padding-left: 7px
+    padding-right: 7px
+
+    .row
+      margin: 0
+
+  .no-one-box
+    padding: 30px
+
+  .create-box
+    max-width: 300px
+    margin: 0 auto
+    padding: 0 14px
+
+  .loader
+    color: #adacac;
+    font-size: 30px
+
+task
+  margin-top: $offset
+  padding: 0 7px !important
+  
+  .task-box
+    height: 90px
 
 // media
 
