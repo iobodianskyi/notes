@@ -33,11 +33,13 @@ export class TaskService {
   }
 
   create(note: string) {
-    const task = <Task>{ note: note, created: new Date() };
+    const date = new Date();
+    const task = <Task>{ note: note, created: date, edited: date };
     return this.taskCollection.add(task);
   }
 
   update(task: Task) {
+    task.edited = new Date();
     return this.getTask(task.id)
       .set(task, { merge: true });
   }
