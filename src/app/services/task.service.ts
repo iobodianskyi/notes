@@ -32,7 +32,8 @@ export class TaskService {
     );
   }
 
-  create(task: Task) {
+  create(note: string) {
+    const task = <Task>{ note: note, created: new Date() };
     return this.taskCollection.add(task);
   }
 

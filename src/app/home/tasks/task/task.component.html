@@ -3,7 +3,7 @@
   <div class="editable no-outline text-left"
        contenteditable="true"
        placeholder="Note..."
-       [textContent]="task.note"
+       [innerHtml]="task.note"
        (focus)="focused = true"
        (focusout)="focusOut($event.target); focused = fasle"></div>
 </div>

@@ -19,7 +19,7 @@ export class TasksComponent implements OnInit {
 
   focusOut(editElement) {
     if (editElement.textContent) {
-      this.taskService.create(<Task>{ note: editElement.textContent, created: new Date() })
+      this.taskService.create(editElement.innerHTML)
         .catch(console.log);
 
       editElement.textContent = '';

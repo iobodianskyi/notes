@@ -15,10 +15,10 @@ export class TaskComponent implements OnInit {
 
   focusOut(editedElement) {
     if (editedElement.textContent) {
-      this.task.note = editedElement.textContent;
+      this.task.note = editedElement.innerHTML;
       this.taskService.update(this.task);
     }
 
-    editedElement.textContent = this.task.note;
+    editedElement.innerHTML = this.task.note;
   }
 }
