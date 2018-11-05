@@ -1,7 +1,7 @@
 <div id="tasks"
      class="main-content h-100">
   <div class="m-auto create-box"
-       *ngIf="tasks$ | async; else loading">
+       *ngIf="tasks; else loading">
     <div class="boxed task-box"
          [ngClass]="{'focused': focused}">
       <div class="editable no-outline text-left"
@@ -13,7 +13,7 @@
   </div>
 
   <div class="container-fluid"
-       *ngIf="tasks$ | async as tasks; else loading">
+       *ngIf="tasks; else loading">
     <div class="row"
          *ngIf="tasks.length; else emptyList">
       <task class="col-12 col-sm-6 col-lg-4 col-xl-3 animated"
@@ -22,11 +22,21 @@
     </div>
 
     <ng-template #emptyList>
-      <div class="position-absolute absolute-center">
+      <div *ngIf="!allTasksLength; else notfound"
+           class="position-absolute absolute-center">
         <div class="boxed no-one-box">
           <div class="loader no-select text-center">Start by creating first one!</div>
         </div>
       </div>
+
+      <ng-template #notfound>
+        <div class="position-absolute absolute-center">
+          <div class="boxed no-one-box">
+            <div class="loader no-select text-center">No tasks found</div>
+          </div>
+        </div>
+      </ng-template>
+
     </ng-template>
   </div>
 

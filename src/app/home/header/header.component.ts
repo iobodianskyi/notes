@@ -47,6 +47,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.tasksService.search$.next(search);
   }
 
+  filterColor(color) {
+    this.tasksService.color$.next(color);
+  }
+
   ngOnDestroy() {
     this.userSubscribtion.unsubscribe();
     this.searchSubject.unsubscribe();

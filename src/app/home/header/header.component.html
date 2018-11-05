@@ -28,11 +28,11 @@
                (ngModelChange)="searchChanged()">
       </div>
       <div class="nested-item">
-        <i class="fa fa-square pointer teal-color"></i>
-        <i class="fa fa-square pointer blue-color"></i>
-        <i class="fa fa-square pointer deep-orange-color"></i>
-        <i class="fa fa-square pointer amber-color"></i>
-        <i class="fa fa-square pointer brown-color"></i>
+        <i class="fa fa-square pointer teal-color" (click)="filterColor('teal')"></i>
+        <i class="fa fa-square pointer blue-color" (click)="filterColor('blue')"></i>
+        <i class="fa fa-square pointer deep-orange-color" (click)="filterColor('deep-orange')"></i>
+        <i class="fa fa-square pointer amber-color" (click)="filterColor('amber')"></i>
+        <i class="fa fa-square pointer brown-color" (click)="filterColor('brown')"></i>
       </div>
     </div>
     <div class="header-item d-flex flex-row flex-nowrap align-items-center">

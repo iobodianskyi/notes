@@ -9,6 +9,7 @@ import { map } from 'rxjs/operators';
 @Injectable({ providedIn: 'root' })
 export class TaskService {
   search$ = new BehaviorSubject<string>('');
+  color$ = new BehaviorSubject<string>('');
 
   constructor(
     private firebaseStore: AngularFirestore,
@@ -51,6 +52,7 @@ export class TaskService {
       created: date,
       edited: date,
       completed: false,
+      color: '',
       trashed: false
     };
 
