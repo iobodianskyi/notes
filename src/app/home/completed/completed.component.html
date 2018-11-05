@@ -1,7 +1,7 @@
 <div id="completed-tasks"
      class="main-content h-100">
   <div class="container-fluid"
-       *ngIf="completedTasks$ | async as completedTasks; else loading">
+       *ngIf="completedTasks; else loading">
     <div class="row"
          *ngIf="completedTasks.length; else emptyList">
       <task class="col-12 col-sm-6 col-lg-4 col-xl-3 animated"
@@ -10,11 +10,20 @@
     </div>
 
     <ng-template #emptyList>
-      <div class="position-absolute absolute-center">
+      <div *ngIf="!allCompletedLength; else notfound"
+           class="position-absolute absolute-center">
         <div class="boxed no-one-box">
           <div class="loader no-select text-center">There is no completed tasks</div>
         </div>
       </div>
+
+      <ng-template #notfound>
+        <div class="position-absolute absolute-center">
+          <div class="boxed no-one-box">
+            <div class="loader no-select text-center">No tasks found</div>
+          </div>
+        </div>
+      </ng-template>
     </ng-template>
   </div>
 

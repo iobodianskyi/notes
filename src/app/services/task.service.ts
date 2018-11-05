@@ -14,8 +14,7 @@ export class TaskService {
   constructor(
     private firebaseStore: AngularFirestore,
     private account: AccountService,
-    private utils: UtilsService) {
-  }
+    private utils: UtilsService) { }
 
   getAll(): Observable<Task[]> {
     const userId = this.account.getUser().uid;

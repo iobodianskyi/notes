@@ -19,7 +19,5 @@ export class UtilsService {
     }
   };
 
-  searchDelay: 200;
-
   constructor() { }
 }
