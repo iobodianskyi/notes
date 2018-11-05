@@ -18,6 +18,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { TaskComponent } from './home/tasks/task/task.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { TaskComponent } from './home/tasks/task/task.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     NgbModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,

@@ -6,6 +6,7 @@ import { AccountService } from 'src/app/services/account.service';
   templateUrl: './sidebar.component.html'
 })
 export class SidebarComponent implements OnInit {
+  menuCollapsed: boolean;
 
   constructor(private account: AccountService) { }
 

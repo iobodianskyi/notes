@@ -8,6 +8,7 @@ import { TaskService } from 'src/app/services/task.service';
 })
 export class TaskComponent implements OnInit {
   @Input() task: Task;
+  focused: boolean;
 
   constructor(private taskService: TaskService) { }
 

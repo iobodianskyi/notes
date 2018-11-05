@@ -2,16 +2,19 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, DocumentChangeAction } from '@angular/fire/firestore';
 import { Task } from '../models/task';
 import { UtilsService } from './utils.service';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { AccountService } from './account.service';
 import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class TaskService {
+  search$ = new BehaviorSubject<string>('');
+
   constructor(
     private firebaseStore: AngularFirestore,
     private account: AccountService,
-    private utils: UtilsService) { }
+    private utils: UtilsService) {
+  }
 
   getAll(): Observable<Task[]> {
     const userId = this.account.getUser().uid;
