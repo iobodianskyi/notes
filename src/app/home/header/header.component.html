@@ -33,6 +33,7 @@
         <i class="fa fa-square pointer deep-orange-color" (click)="filterColor('deep-orange')"></i>
         <i class="fa fa-square pointer amber-color" (click)="filterColor('amber')"></i>
         <i class="fa fa-square pointer brown-color" (click)="filterColor('brown')"></i>
+        <i class="fa fa-times pointer" (click)="filterColor('')" *ngIf="hasColorFilter"></i>
       </div>
     </div>
     <div class="header-item d-flex flex-row flex-nowrap align-items-center">
