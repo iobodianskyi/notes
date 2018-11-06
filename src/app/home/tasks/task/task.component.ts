@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Task } from 'src/app/models/task';
-import { TaskService } from 'src/app/services/task.service';
+import { ActionService } from 'src/app/services/action.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'task',
@@ -10,39 +11,50 @@ export class TaskComponent implements OnInit {
   @Input() task: Task;
   focused: boolean;
 
-  constructor(private taskService: TaskService) { }
+  constructor(
+    private action: ActionService,
+    private utils: UtilsService) { }
 
   ngOnInit() { }
 
   focusOut(editedElement) {
-    if (editedElement.textContent) {
+    if (editedElement.textContent &&
+      editedElement.textContent !== this.task.note) {
+      const oldTask = { ...this.task };
       this.task.note = editedElement.innerHTML;
-      this.taskService.update(this.task);
+      this.action.execute(this.utils.actions.edit, this.task, oldTask);
     }
 
     editedElement.innerHTML = this.task.note;
   }
 
-  moveToTrash() {
-    this.taskService.moveToTrash(this.task);
-  }
-
-  delete() {
-    this.taskService.delete(this.task.id);
-  }
-
   setColor(color: string) {
-    this.task.color = color;
-    this.taskService.update(this.task);
+    if (color !== this.task.color) {
+      const oldTask = { ...this.task };
+      this.task.color = color;
+      this.action.execute(this.utils.actions.setColor, this.task, oldTask);
+    }
   }
 
   complete() {
+    const oldTask = { ...this.task };
     this.task.completed = !this.task.completed;
-    this.taskService.update(this.task);
+    this.action.execute(this.utils.actions.complete, this.task, oldTask);
+  }
+
+  moveToTrash() {
+    const oldTask = { ...this.task };
+    this.task.trashed = true;
+    this.action.execute(this.utils.actions.trash, this.task, oldTask);
   }
 
   restore() {
+    const oldTask = { ...this.task }
     this.task.trashed = false;
-    this.taskService.update(this.task);
+    this.action.execute(this.utils.actions.restoreTrashed, this.task, oldTask);
+  }
+
+  delete() {
+    this.action.execute(this.utils.actions.delete, this.task, { ...this.task });
   }
 }

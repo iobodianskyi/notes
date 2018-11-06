@@ -44,17 +44,7 @@ export class TaskService {
       .pipe(this.mapTaskChanges());
   }
 
-  create(note: string) {
-    const date = new Date();
-    const task = <Task>{
-      note: note,
-      created: date,
-      edited: date,
-      completed: false,
-      color: '',
-      trashed: false
-    };
-
+  create(task: Task) {
     return this.getTaskCollection().add(task);
   }
 
@@ -64,14 +54,13 @@ export class TaskService {
       .set(task, { merge: true });
   }
 
-  moveToTrash(task: Task) {
-    task.trashed = true;
+  updateToOld(task: Task) {
     return this.getTaskDocument(task.id)
       .set(task, { merge: true });
   }
 
   delete(taskId) {
-    this.getTaskDocument(taskId)
+    return this.getTaskDocument(taskId)
       .delete();
   }
 

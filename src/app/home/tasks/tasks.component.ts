@@ -30,7 +30,17 @@ export class TasksComponent implements OnInit, OnDestroy {
 
   focusOut(editElement) {
     if (editElement.textContent) {
-      this.taskService.create(editElement.innerHTML)
+      const date = new Date();
+      const task = <Task>{
+        note: editElement.innerHTML,
+        created: date,
+        edited: date,
+        completed: false,
+        color: '',
+        trashed: false
+      };
+      
+      this.taskService.create(task)
         .catch(console.log);
 
       editElement.textContent = '';

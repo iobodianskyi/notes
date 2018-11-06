@@ -19,5 +19,40 @@ export class UtilsService {
     }
   };
 
+  delays = {
+    undoActionPresence: 10000
+  }
+
+  actions = {
+    create: {
+      name: 'create',
+      title: 'Task created'
+    },
+    edit: {
+      name: 'edit',
+      title: 'Task edited'
+    },
+    complete: {
+      name: 'complete',
+      title: 'Task completed'
+    },
+    trash: {
+      name: 'trash',
+      title: 'Task trashed'
+    },
+    restoreTrashed: {
+      name: 'restore-trashed',
+      title: 'Task restored'
+    },
+    delete: {
+      name: 'delete',
+      title: 'Task deleted'
+    },
+    setColor: {
+      name: 'set-color',
+      title: 'Task edited'
+    }
+  }
+
   constructor() { }
 }
