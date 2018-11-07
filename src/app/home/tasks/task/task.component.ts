@@ -36,12 +36,6 @@ export class TaskComponent implements OnInit {
     }
   }
 
-  complete() {
-    const oldTask = { ...this.task };
-    this.task.completed = !this.task.completed;
-    this.action.execute(this.utils.actions.complete, this.task, oldTask);
-  }
-
   moveToTrash() {
     const oldTask = { ...this.task };
     this.task.trashed = true;

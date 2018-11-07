@@ -25,7 +25,6 @@ export class ActionService {
     switch (info.name) {
       case this.utils.actions.edit.name:
       case this.utils.actions.setColor.name:
-      case this.utils.actions.complete.name:
       case this.utils.actions.trash.name:
       case this.utils.actions.restoreTrashed.name: {
         actionPromise = this.taskService.update(newTask);
@@ -51,7 +50,6 @@ export class ActionService {
     switch (name) {
       case this.utils.actions.edit.name:
       case this.utils.actions.setColor.name:
-      case this.utils.actions.complete.name:
       case this.utils.actions.trash.name:
       case this.utils.actions.restoreTrashed.name: {
         actionPromise = this.taskService.updateToOld(this.lastAction.oldTask);

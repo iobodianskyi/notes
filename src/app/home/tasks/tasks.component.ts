@@ -35,7 +35,6 @@ export class TasksComponent implements OnInit, OnDestroy {
         note: editElement.innerHTML,
         created: date,
         edited: date,
-        completed: false,
         color: '',
         trashed: false
       };

@@ -14,7 +14,6 @@ export class UtilsService {
     task: (taskId: string, userId: string): string => { return this.db.tasks(userId) + taskId },
     fields: {
       created: 'created',
-      completed: 'completed',
       trashed: 'trashed'
     }
   };
@@ -31,10 +30,6 @@ export class UtilsService {
     edit: {
       name: 'edit',
       title: 'Task edited'
-    },
-    complete: {
-      name: 'complete',
-      title: 'Task completed'
     },
     trash: {
       name: 'trash',

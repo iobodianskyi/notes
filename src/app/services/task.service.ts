@@ -26,15 +26,6 @@ export class TaskService {
       .pipe(this.mapTaskChanges());
   }
 
-  getCompleted() {
-    const userId = this.account.getUser().uid;
-    const tasksPath = this.utils.db.tasks(userId);
-    return this.firebaseStore
-      .collection<Task>(tasksPath, this.queryCompleted())
-      .snapshotChanges()
-      .pipe(this.mapTaskChanges());
-  }
-
   getTrashed() {
     const userId = this.account.getUser().uid;
     const tasksPath = this.utils.db.tasks(userId);
@@ -68,18 +59,6 @@ export class TaskService {
     return (ref: firebase.firestore.CollectionReference) => {
       let query = ref
         .where(this.utils.db.fields.trashed, '==', false)
-        .where(this.utils.db.fields.completed, '==', false)
-        .orderBy(this.utils.db.fields.created, 'desc');
-
-      return query;
-    }
-  }
-
-  private queryCompleted() {
-    return (ref: firebase.firestore.CollectionReference) => {
-      let query = ref
-        .where(this.utils.db.fields.trashed, '==', false)
-        .where(this.utils.db.fields.completed, '==', true)
         .orderBy(this.utils.db.fields.created, 'desc');
 
       return query;
