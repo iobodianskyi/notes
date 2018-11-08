@@ -1,0 +1,19 @@
+<div id="footer"
+     class="no-select row align-items-center">
+  <div class="col-4">
+    <div class="text-center"
+         [ngClass]="{'invisible': !lastAction}">
+      <div class="undo-box">
+        <span [innerHtml]="lastActionTitle"></span>:
+        <span class="pointer"
+              (click)="undoAction()">
+         <b>undo</b>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="line-footer m-auto"></div>
+  </div>
+  <div class="col-4"></div>
+</div>

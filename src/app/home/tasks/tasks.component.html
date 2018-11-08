@@ -1,24 +1,28 @@
 <div id="tasks"
      class="main-content h-100">
-  <div class="m-auto create-box"
-       *ngIf="tasks; else loading">
-    <div class="boxed task-box"
+  <div class="task-wrap">
+    <div class="task-box create-box"
          [ngClass]="{'focused': focused}">
-      <div class="editable no-outline text-left"
-           contenteditable="true"
-           placeholder="New task..."
-           (focus)="focused = true"
-           (focusout)="focusOut($event.target); focused = fasle"></div>
+      <div class="edit-box h-100">
+        <div class="editable h-100 no-outline text-left"
+             contenteditable="true"
+             placeholder="New task..."
+             (focus)="focused = true"
+             (focusout)="focusOut($event.target); focused = false">
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="container-fluid"
+  <div class="container-fluid content"
        *ngIf="tasks; else loading">
-    <div class="row"
+    <div class="row not-normal"
+         [ngClass]="{'normal': !!tasks.length}"
          *ngIf="tasks.length; else emptyList">
-      <task class="col-12 col-sm-6 col-lg-4 col-xl-3 animated"
-            *ngFor="let task of tasks"
-            [task]=task></task>
+      <div class="col-12 col-sm-6 col-lg-4 col-xl-3"
+           *ngFor="let task of tasks">
+        <task [task]=task></task>
+      </div>
     </div>
 
     <ng-template #emptyList>

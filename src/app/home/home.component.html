@@ -1,5 +1,13 @@
-<app-header></app-header>
-<app-sidebar></app-sidebar>
-<section id="home-content" class="boxed">
-  <router-outlet></router-outlet>
-</section>
+<div class="full-wrap">
+  <div class="wrap-border h-100">
+    <div class="wrap-content h-100">
+      <section>
+        <app-header></app-header>
+      </section>
+      <section>
+        <router-outlet></router-outlet>
+      </section>
+      <app-footer></app-footer>
+    </div>
+  </div>
+</div>

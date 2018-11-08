@@ -36,6 +36,14 @@ export class TaskComponent implements OnInit {
     }
   }
 
+  resetColor() {
+    if ('' !== this.task.color) {
+      const oldTask = { ...this.task };
+      this.task.color = '';
+      this.action.execute(this.utils.actions.setColor, this.task, oldTask);
+    }
+  }
+
   moveToTrash() {
     const oldTask = { ...this.task };
     this.task.trashed = true;

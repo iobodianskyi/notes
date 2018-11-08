@@ -1,41 +1,41 @@
-
 // common
 
-$header-height: 60px
-$offset: 14px
-$sidebar-width: 250px
-$box-shadow: 0 0px 1px rgba(0, 0, 0, 0.16), 0 0px 2px rgba(0, 0, 0, 0.23)
-$box-shadow-focused: 0 0px 10px rgba(0, 0, 0, 0.16), 0 1px 10px rgba(0, 0, 0, 0.23)
-$background-gray: #f8f9fb
-$gray: #6d7e8e
-$placeholder: #afafaf
-$teal: #7ef7eb
-$blue: #a5d5fb
-$deep-orange: #ffda6b
-$amber: #ffb9b9
-$brown: #c9ffb8
+$gray: #C6C2C2
+$font-color: #707070
+$placeholder: #dedede
+$color-1: #62ACB4
+$color-2: #B1B264
+$color-3: #F4B86D
+$color-4: #E3B6B6
+$color-5: #FC7042
 $transition: .15s ease-in-out
 $radius: 10px
-$font: 20px
+$content-radius: 50px
+$border: 2px solid $gray
 
 body
-  background-color: $background-gray
-  color: $gray
+  background-color: $gray
+  color: $font-color
+
+// .not-normal
+//   transform: scale(1.3)
+
+//   &.normal
+//     transform: scale(1)
 
 a
-  color: $gray
+  color: $font-color
   text-transform: none
   text-decoration: none
 
   &:hover
-    color: $gray
+    color: $font-color
     text-transform: none
     text-decoration: none
 
 .boxed
   background-color: #fff
-  box-shadow: $box-shadow
-  border-radius: $radius
+  border-radius: $radius 
 
 .btn
   border-radius: $radius
@@ -82,39 +82,37 @@ input::placeholder
   outline: none
 
 .absolute-center
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
 
-.teal-color
-  color: $teal
+.color-1
+  border-color: $color-1 !important
 
-.teal
-  background-color: $teal
+.color-2
+  border-color: $color-2 !important
 
-.blue-color
-  color: $blue
+.color-3
+  border-color: $color-3 !important
 
-.blue
-  background-color: $blue
+.color-4
+  border-color: $color-4 !important
 
-.deep-orange-color
-  color: $deep-orange
+.color-5
+  border-color: $color-5 !important
 
-.deep-orange
-  background-color: $deep-orange
+.dropdown
+  button
+    box-shadow: none !important
+    color: $gray !important
+    outline: none !important
+    cursor: pointer
 
-.amber-color
-  color: $amber
+    &:active
+      background-color: transparent !important
 
-.amber
-  background-color: $amber
-
-.brown-color
-  color: $brown
-
-.brown
-  background-color: $brown
+    &::after
+      display: none
 
 // pages
 
@@ -138,245 +136,218 @@ input::placeholder
 
     .main-description
       margin: 30px
-      font-size: $font
+      font-size: 20px
 
     hr
       margin: 30px
 
     .login-container
       max-width: 300px
-      padding: $offset
+      padding: 15px
       border-radius: $radius
       box-shadow: 0 0px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
 
       .sing-text
-        margin-bottom: $offset
+        margin-bottom: 15px
         font-size: 12px
+
+.full-wrap
+  height: 100vh
+  padding: 10px
+
+.wrap-border
+  padding: 10px 10px 40px 10px
+  border: 10px solid #fff
+  border-radius: $content-radius
+
+.wrap-content
+  background-color: #fff
+  border-radius: 35px
+  overflow: hidden
+
+.content
+  max-height: calc(100vh - 260px)
+  overflow-y: auto
 
 // header
 header
-  position: fixed
-  top: $offset
-  right: $offset
-  left: $offset
-  height: $header-height
+  height: 70px
 
-  .header-item
+  .head-link
     margin-left: 10px
-    margin-right: 10px
 
-    &:first-child
-      margin-left: $offset
+  .head
+    height: 50px
+    margin: 0 10px
+    background-color: $gray
+    border-radius: 0 0 $content-radius $content-radius
 
-    &:last-child
-      margin-right: $offset
-
-    .nested-item
-      margin-left: 10px
-      margin-right: 10px
-
-      &:first-child
-        margin-left: 0
-
-      &:last-child
-        margin-right: 0
-
-  .icon
-    font-size: 25px
-    line-height: $header-height
-
-    &.collapsed
-      transform: rotate(90deg)
-
-  .fa.logo
-    font-size: 40px
-
-  .logo-title
-    font-size: $font
-    text-shadow: 0 1px 1px #c1bfbf
-    white-space: nowrap
-
-  .search-container
-    border: 1px solid #ced4da
-    border-radius: $radius
+  #search
+    background: none !important
+    border: none !important
+    box-shadow: none
+    color: #fff
+    font-size: 22px
+    letter-spacing: 2px
     
-    &:focus-within
-      box-shadow: $box-shadow
+    &::placeholder
+      color: #fff !important 
 
-    label
-      margin: 0
-
-      i
-        padding: 10px
-        font-size: 18px
-
-    input
-      border: 0 !important
-      border-radius: $radius
-      box-shadow: none !important
-
-  .fa
-    margin: 0 5px
-    font-size: $font
+  .color-option
+    max-width: 140px
+    width: 140px
 
   .user-logo
     width: 35px
     height: 35px
+    margin-left: 10px
     border-radius: 50%
 
-// sidebar
-#sidebar
-  position: fixed
-  top: ($header-height + $offset * 2)
-  bottom: $offset
-  left: $offset
-  width: $sidebar-width
-  padding-top: 10px
-  overflow-y: auto
+  .logout
+    width: 25px
+    margin-left: 10px
 
-  &.collapsed
-    transform: translateX(-100%)
+.color-option
+  height: 25px
+  margin-right: 10px
 
-  .nav-item
-    padding: 5px 0
-    cursor: pointer
+  &:last-child 
+    margin-right: 0
 
-    &:hover,
-    &.active
-      font-weight: bold
-  
-    .fa
-      margin: 0 $offset
+  .color
+    width: 100%
+    height: 25px
+    border: 3px solid
+    border-left: none
+    border-right: none
+    background-color: transparent
 
-    .fa-sign-out
-      transform: rotate(180deg)
+    &:first-child,
+    &:last-child
+      border: 3px solid
+      border-radius: 7px
 
-    hr
-      margin: 10px $offset 0px $offset
+    &:first-child
+      border-right: none
+      border-top-right-radius: 0
+      border-bottom-right-radius: 0
 
-  .undo-nav-item
-    .undo-box
-      margin-right: $offset
-      margin-bottom: $offset
-      margin-left: $offset
+    &:last-child
+      border-left: none
+      border-top-left-radius: 0
+      border-bottom-left-radius: 0
 
-// home-content
+.task-wrap
+  overflow: hidden
 
-#home-content
-  position: fixed
-  top: ($header-height + $offset * 2)
-  right: $offset
-  bottom: $offset
-  left: ($sidebar-width + $offset * 2)
+  .task-head
+    height: 15px
+    background: #fff
 
-// components shared
+  .options-container
+    position: absolute
+    top: 5px
+    left: 50%
+    transform: translateX(-50%)
+    height: 30px
+    background: #fff
+    border: $border
+    border-top: none
+    border-radius: 20px
 
-.task-box
-  max-height: 150px
-  transition: $transition
+  &:hover 
+    .options-container,
+      top: 5px
 
-  &.focused
-    box-shadow: $box-shadow-focused
+    .options
+      top: 0
 
-  .editable
-    padding: 10px
-    cursor: text
+  .options
+    top: -25px
+    left: 50%
+    padding: 0 10px
+    transform: translateX(-50%)
+    z-index: 200
 
-    &:empty:before
-      content: attr(placeholder)
-      display: block
-      color: $placeholder
+    .dot
+      width: 5px
+      height: 5px
+      background-color: $gray
+      border-radius: 50%
 
-.main-content
-  overflow-y: auto
-  padding: $offset 0
+    .dropdown-menu
+      background: $gray
 
-  .container-fluid
-    padding-left: 7px
-    padding-right: 7px
+      .dropdown-item
+        padding: 3px 10px
+        color: #fff !important
+        background-color: $gray !important
 
-    .row
-      margin: 0
+    .option-img
+      width: 25px
 
-  .no-one-box
-    padding: 30px
+  .options-container, .options
+    width: 55%
 
-  .loader
-    color: #adacac;
-    font-size: 30px
+  // .options-container-left
+  //   position: absolute
+  //   top: 10px
+  //   width: 50px
+  //   left: 24px
+  //   height: 30px
+  //   background: #fff
+  //   border: 2px solid #C6C2C2
+  //   border-radius: 7px
+  //   border-bottom-color: #fff
+  //   border-left: none
+  //   border-top-left-radius: 0
 
-// tasks
-
-#tasks
-  padding: $offset 0
-
-  .create-box
-    max-width: 300px
-    margin: 0 auto
-    padding: 0 14px
-
-task
-  margin-top: $offset
-  padding: 0 7px !important
-
-  button
-    box-shadow: none !important
-    color: $gray !important
-    outline: none !important
-    cursor: pointer
-
-    &:active
-      background-color: transparent !important
-  
   .task-box
-    height: 141px
+    height: 135px
+    margin-bottom: 10px
     padding-top: 10px
+    padding-bottom: 10px
+    border: $border
+    border-radius: 22px
 
     .edit-box
-      height: 90px
-      overflow-y: auto 
+      padding: 0 10px 10px 10px
+      overflow: auto
 
-      .editable
-        padding: 0 10px
-        color: $gray
+    &.focused
 
-    hr
-      margin: 10px 10px 0
+    .editable
+      padding: 10px
+      cursor: text
 
-    .options-box
-      justify-content: space-evenly
-      
-      .options-icon
-        transform: rotate(90deg)
+      &:empty:before
+        content: attr(placeholder)
+        display: block
+        color: $placeholder
 
-      i
-        font-size: $font
-        margin: 0 5px
+    &.create-box
+      width: 300px
+      height: 70px
+      margin: 10px auto 20px auto
 
-      button
-        border: none
-        color: $gray
-        font-size: $font
-        background: transparent
+#footer
+  position: fixed
+  bottom: 20px
+  left: 30px
+  right: 30px
+  height: 40px
 
-        &::after
-          display: none
+  .line-footer
+    width: 50%
+    height: 10px
+    background: #fff
+    border-radius: 20px
 
-      .dropdown
-        .dropdown-menu
-          padding: 5px 0px
-          border-radius: $radius
-
-          .dropdown-item
-            padding: 3px 10px
-            font-size: 15px
-
-            i
-              font-size: 15px
+  .undo-box
+    color: #a09f9f
 
 
-
-// media
+  // media
 
 // Extra small devices (portrait phones, less than 576px)
 @media (max-width: 575.98px)

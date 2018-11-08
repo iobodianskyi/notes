@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   userSubscribtion: Subscription;
   search: string;
   hasColorFilter: boolean = false;
+  colorFilter: string = '';
 
   constructor(
     private account: AccountService,
@@ -26,14 +27,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   searchChanged() {
     this.search = this.search.trim();
-
-    console.log(this.search);
     this.tasksService.search$.next(this.search)
   }
 
   filterColor(color) {
     this.tasksService.color$.next(color);
     this.hasColorFilter = !!color;
+  }
+
+  logout() {
+    this.account.logout();
   }
 
   ngOnDestroy() {

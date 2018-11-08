@@ -1,48 +1,60 @@
-<header class="boxed animated">
-  <div class="d-flex flex-row flex-nowrap align-items-center justify-content-between">
-    <div class="header-item d-flex flex-row flex-nowrap align-items-center">
-      <div class="nested-item">
-        <i class="icon animated pointer fa fa-ellipsis-h"
-           [ngClass]="menuCollapsed ? 'collapsed' : ''"
-           (click)="menuCollapsed = !menuCollapsed"></i>
-      </div>
-      <a class="nested-item"
-         routerLink="/tasks">
-        <i class="logo fa fa-list-alt"></i>
+<header class="container-fluid">
+  <div class="row">
+    <div class="col-3 d-flex justify-content-center align-items-center">
+      <a class="head-link"
+         routerLink="/tasks"
+         routerLinkActive="active">
+        Tasks
       </a>
-      <a class="nested-item logo-title no-select"
-         routerLink="/tasks">Task Manager</a>
+      <a class="head-link"
+         routerLink="/tasks"
+         routerLinkActive="active">
+        Completed
+      </a>
+      <a class="head-link"
+         routerLink="/trash"
+         routerLinkActive="active">
+        Trash
+      </a>
     </div>
-
-    <div class="header-item d-flex flex-row flex-nowrap align-items-center">
-      <div class="nested-item search-container d-flex flex-row flex-nowrap align-items-center animated">
-        <label for="search">
-          <i class="fa fa-search"></i>
-        </label>
+    <div class="col-6 p-0">
+      <div class="head d-flex justify-content-around align-items-center">
         <input id="search"
                name="search"
-               class="form-control"
+               class="text-center no-outline"
                type="text"
-               placeholder="Search"
+               placeholder="Looking for..."
                [(ngModel)]="search"
                (ngModelChange)="searchChanged()">
-      </div>
-      <div class="nested-item">
-        <i class="fa fa-square pointer teal-color" (click)="filterColor('teal')"></i>
-        <i class="fa fa-square pointer blue-color" (click)="filterColor('blue')"></i>
-        <i class="fa fa-square pointer deep-orange-color" (click)="filterColor('deep-orange')"></i>
-        <i class="fa fa-square pointer amber-color" (click)="filterColor('amber')"></i>
-        <i class="fa fa-square pointer brown-color" (click)="filterColor('brown')"></i>
-        <i class="fa fa-times pointer" (click)="filterColor('')" *ngIf="hasColorFilter"></i>
+        <div class="d-flex justify-content-around align-items-center">
+          <div class="color-option col p-0 d-flex justify-content-around align-items-center">
+            <div class="color pointer color-1"
+                 (click)="filterColor('color-1')"></div>
+            <div class="color pointer color-2"
+                 (click)="filterColor('color-2')"></div>
+            <div class="color pointer color-3"
+                 (click)="filterColor('color-3')"></div>
+            <div class="color pointer color-4"
+                 (click)="filterColor('color-4')"></div>
+            <div class="color pointer color-5"
+                 (click)="filterColor('color-5')"></div>
+          </div>
+          <div class="gray pointer"
+               (click)="filterColor('')"
+               [ngClass]="{'invisible': !hasColorFilter}">x</div>
+        </div>
       </div>
     </div>
-    <div class="header-item d-flex flex-row flex-nowrap align-items-center">
-      <span class="nested-item"
-            *ngIf="user"
+    <div class="col-3 d-flex justify-content-center align-items-center">
+      <span *ngIf="user"
             [innerHTML]="user.displayName"></span>
-      <img class="user-logo pointer"
+      <img class="user-logo"
            [src]="user.photoUrl"
            alt="Task Manager - User"
+           *ngIf="user">
+      <img class="logout pointer"
+           src="/assets/img/logout.png"
+           (click)="logout()"
            *ngIf="user">
     </div>
   </div>

@@ -29,7 +29,7 @@ export class UtilsService {
     },
     edit: {
       name: 'edit',
-      title: 'Task edited'
+      title: 'Task updated'
     },
     trash: {
       name: 'trash',
@@ -45,7 +45,7 @@ export class UtilsService {
     },
     setColor: {
       name: 'set-color',
-      title: 'Task edited'
+      title: 'Task updated'
     }
   }
 

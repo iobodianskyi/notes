@@ -5,18 +5,15 @@ import { Subscription } from 'rxjs';
 import { Action } from 'src/app/models/actions';
 
 @Component({
-  selector: 'app-sidebar',
-  templateUrl: './sidebar.component.html'
+  selector: 'app-footer',
+  templateUrl: './footer.component.html'
 })
-export class SidebarComponent implements OnInit, OnDestroy {
-  menuCollapsed: boolean;
+export class FooterComponent implements OnInit, OnDestroy {
   lastAction: string;
   lastActionSubscribtion: Subscription;
   lastActionTitle: string;
 
-  constructor(
-    private account: AccountService,
-    private action: ActionService) { }
+  constructor(private action: ActionService) { }
 
   ngOnInit() {
     this.lastActionSubscribtion = this.action.getLast()
@@ -34,10 +31,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
   undoAction() {
     this.action.undoLast(this.lastAction);
     this.resetAction();
-  }
-
-  logout() {
-    this.account.logout();
   }
 
   resetAction() {
