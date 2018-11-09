@@ -1,32 +1,47 @@
-<div class="home-background">
-  <div class="content d-flex justify-content-center align-items-center">
-    <div class="text-center">
-      <p class="logo">
-      </p>
-      <h1 class="main-title">
-        Get more done with Notes
-      </h1>
-      <div class="main-description">
-        Simple and easy way to manage your daily notes
-      </div>
-      <hr>
-      <div class="">
-        <div class="text-center m-3">
-          <div class="login-container mx-auto">
-            <div class="sing-text text-uppercase">Sign In</div>
-            <div>
-              <button class="app-btn primary facebook-login w-100" (click)="connectWithFacebook()">
-                Connect with Facebook
-              </button>
-            </div>
-            <div>
-              <button class="app-btn primary google-login w-100" (click)="connectWithGoogle()">
-                Connect with Google
-              </button>
+<div class="full-wrap"
+     id="login">
+  <div class="wrap-border h-100">
+    <div class="wrap-content h-100">
+      <header class="container-fluid">
+        <div class="row">
+          <div class="col-3"></div>
+          <div class="col-6 p-0">
+            <div class="head d-flex justify-content-around align-items-center"></div>
+          </div>
+          <div class="col-3"></div>
+        </div>
+      </header>
+
+      <div class="content d-flex justify-content-center align-items-center">
+        <div class="text-center">
+          <h1 class="main-title">
+            Get more done with Notes
+          </h1>
+          <div class="main-description">
+            Simple and easy way to manage your daily notes
+          </div>
+          <div>
+            <div class="text-center m-3">
+              <div class="login-container mx-auto row">
+                <div class="col-12 col-sm-6 p-0 text-sm-right">
+                  <button class="app-btn lg w-auto"
+                          (click)="connectWithFacebook()">
+                    Connect with Facebook
+                  </button>
+                </div>
+                <div class="col-12 col-sm-6 p-0 text-sm-left">
+                  <button class="app-btn lg w-auto"
+                          (click)="connectWithGoogle()">
+                    Connect with Google
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+      <app-footer></app-footer>
     </div>
   </div>
 </div>
