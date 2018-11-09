@@ -1,6 +1,6 @@
-<div class="task-wrap position-relative">
+<div class="note-wrap position-relative">
   <div class="options-container animated"
-       ngClass={{task.color}}></div>
+       ngClass={{note.color}}></div>
   <div class="options-container-left"></div>
   <div class="options position-absolute animated d-flex justify-content-around align-items-center">
     <div class="color-option col p-0 d-flex justify-content-around align-items-center">
@@ -28,37 +28,37 @@
       </button>
       <div ngbDropdownMenu class="border-0">
         <button class="dropdown-item"
-                *ngIf="!task.trashed"
+                *ngIf="!note.trashed"
                 (click)="resetColor()">
           Reset color
         </button>
         <button class="dropdown-item"
-                *ngIf="!task.trashed"
+                *ngIf="!note.trashed"
                 (click)="moveToTrash()">
           Delete
         </button>
         <button class="dropdown-item"
-                *ngIf="task.trashed"
+                *ngIf="note.trashed"
                 (click)="restore()">
           Restore
         </button>
         <button class="dropdown-item"
-                *ngIf="task.trashed"
+                *ngIf="note.trashed"
                 (click)="delete()">
           Delete forever
         </button>
       </div>
     </div>
   </div>
-  <div class="task-head position-relative"></div>
-  <div class="task-box"
+  <div class="note-head position-relative"></div>
+  <div class="note-box"
        [ngClass]="{'focused': focused}"
-       [class]="task.color">
+       [class]="note.color">
     <div class="edit-box h-100">
       <div class="editable h-100 no-outline text-left"
            contenteditable="true"
            placeholder="Note..."
-           [innerHtml]="task.note"
+           [innerHtml]="note.note"
            (focus)="focused = true"
            (focusout)="focusOut($event.target); focused = false">
       </div>

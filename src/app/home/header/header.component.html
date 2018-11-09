@@ -2,9 +2,9 @@
   <div class="row">
     <div class="col-3 d-flex justify-content-center align-items-center">
       <a class="head-link"
-         routerLink="/tasks"
+         routerLink="/notes"
          routerLinkActive="active">
-        Tasks
+        Notes
       </a>
       <a class="head-link"
          routerLink="/trash"
@@ -45,7 +45,7 @@
             [innerHTML]="user.displayName"></span>
       <img class="user-logo"
            [src]="user.photoUrl"
-           alt="Task Manager - User"
+           alt="Note Manager - User"
            *ngIf="user">
       <img class="logout pointer"
            src="/assets/img/logout.png"

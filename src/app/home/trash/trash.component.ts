@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Task } from 'src/app/models/task';
-import { TaskService } from 'src/app/services/task.service';
+import { Note } from 'src/app/models/note';
+import { NoteService } from 'src/app/services/note.service';
 import { combineLatest, Subscription } from 'rxjs';
 
 @Component({
@@ -8,27 +8,27 @@ import { combineLatest, Subscription } from 'rxjs';
   templateUrl: './trash.component.html'
 })
 export class TrashComponent implements OnInit, OnDestroy {
-  trashedTasks: Task[];
+  trashedNotes: Note[];
   allTrashedLength: number = 0;
-  filteredTasks: Subscription;
+  filteredNotes: Subscription;
 
-  constructor(private taskService: TaskService) { }
+  constructor(private noteService: NoteService) { }
 
   ngOnInit() {
-    this.filteredTasks = combineLatest(
-      this.taskService.getTrashed(),
-      this.taskService.search$,
-      this.taskService.color$)
-      .subscribe(([tasks, search, color]) => {
-        this.allTrashedLength = tasks.length;
-        this.trashedTasks = tasks
-          .filter((task: Task) =>
-            task.note.toLowerCase().includes(search.toLowerCase()) &&
-            task.color.includes(color));
+    this.filteredNotes = combineLatest(
+      this.noteService.getTrashed(),
+      this.noteService.search$,
+      this.noteService.color$)
+      .subscribe(([notes, search, color]) => {
+        this.allTrashedLength = notes.length;
+        this.trashedNotes = notes
+          .filter((note: Note) =>
+            note.note.toLowerCase().includes(search.toLowerCase()) &&
+            note.color.includes(color));
       });
   }
 
   ngOnDestroy() {
-    this.filteredTasks.unsubscribe();
+    this.filteredNotes.unsubscribe();
   }
 }

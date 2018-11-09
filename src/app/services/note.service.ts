@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, DocumentChangeAction } from '@angular/fire/firestore';
-import { Task } from '../models/task';
+import { Note } from '../models/note';
 import { UtilsService } from './utils.service';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { AccountService } from './account.service';
 import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
-export class TaskService {
+export class NoteService {
   search$ = new BehaviorSubject<string>('');
   color$ = new BehaviorSubject<string>('');
 
@@ -16,46 +16,46 @@ export class TaskService {
     private account: AccountService,
     private utils: UtilsService) { }
 
-  getAll(): Observable<Task[]> {
+  getAll(): Observable<Note[]> {
     const userId = this.account.getUser().uid;
-    const tasksPath = this.utils.db.tasks(userId);
+    const notesPath = this.utils.db.notes(userId);
 
     return this.firebaseStore
-      .collection<Task>(tasksPath, this.queryTasks())
+      .collection<Note>(notesPath, this.queryNotes())
       .snapshotChanges()
-      .pipe(this.mapTaskChanges());
+      .pipe(this.mapNoteChanges());
   }
 
   getTrashed() {
     const userId = this.account.getUser().uid;
-    const tasksPath = this.utils.db.tasks(userId);
+    const notesPath = this.utils.db.notes(userId);
     return this.firebaseStore
-      .collection<Task>(tasksPath, this.queryTrashed())
+      .collection<Note>(notesPath, this.queryTrashed())
       .snapshotChanges()
-      .pipe(this.mapTaskChanges());
+      .pipe(this.mapNoteChanges());
   }
 
-  create(task: Task) {
-    return this.getTaskCollection().add(task);
+  create(note: Note) {
+    return this.getNoteCollection().add(note);
   }
 
-  update(task: Task) {
-    task.edited = new Date();
-    return this.getTaskDocument(task.id)
-      .set(task, { merge: true });
+  update(note: Note) {
+    note.edited = new Date();
+    return this.getNoteDocument(note.id)
+      .set(note, { merge: true });
   }
 
-  updateToOld(task: Task) {
-    return this.getTaskDocument(task.id)
-      .set(task, { merge: true });
+  updateToOld(note: Note) {
+    return this.getNoteDocument(note.id)
+      .set(note, { merge: true });
   }
 
-  delete(taskId) {
-    return this.getTaskDocument(taskId)
+  delete(noteId) {
+    return this.getNoteDocument(noteId)
       .delete();
   }
 
-  private queryTasks() {
+  private queryNotes() {
     return (ref: firebase.firestore.CollectionReference) => {
       let query = ref
         .where(this.utils.db.fields.trashed, '==', false)
@@ -75,26 +75,26 @@ export class TaskService {
     }
   }
 
-  private mapTaskChanges() {
-    return map((changeActions: DocumentChangeAction<Task>[]) => {
+  private mapNoteChanges() {
+    return map((changeActions: DocumentChangeAction<Note>[]) => {
       return changeActions.map(changeAction => {
         const data = changeAction.payload.doc.data();
-        return <Task>{ id: changeAction.payload.doc.id, ...data };
+        return <Note>{ id: changeAction.payload.doc.id, ...data };
       })
     })
   }
 
-  private getTaskCollection(): AngularFirestoreCollection<Task> {
+  private getNoteCollection(): AngularFirestoreCollection<Note> {
     const userId = this.account.getUser().uid;
-    const tasksPath = this.utils.db.tasks(userId);
+    const notesPath = this.utils.db.notes(userId);
 
-    return this.firebaseStore.collection<Task>(tasksPath);
+    return this.firebaseStore.collection<Note>(notesPath);
   }
 
-  private getTaskDocument(taskId: string): AngularFirestoreDocument<Task> {
+  private getNoteDocument(noteId: string): AngularFirestoreDocument<Note> {
     const userId = this.account.getUser().uid;
-    const taskPath = this.utils.db.task(taskId, userId);
+    const notePath = this.utils.db.note(noteId, userId);
 
-    return this.firebaseStore.doc<Task>(taskPath);
+    return this.firebaseStore.doc<Note>(notePath);
   }
 }

@@ -4,14 +4,14 @@ import { Injectable } from '@angular/core';
 export class UtilsService {
   routes = {
     root: '/',
-    tasks: '/tasks'
+    notes: '/notes'
   };
 
   db = {
     users: (): string => { return 'users/' },
     user: (userId: string): string => { return this.db.users() + userId },
-    tasks: (userId: string): string => { return this.db.user(userId) + '/tasks/' },
-    task: (taskId: string, userId: string): string => { return this.db.tasks(userId) + taskId },
+    notes: (userId: string): string => { return this.db.user(userId) + '/notes/' },
+    note: (noteId: string, userId: string): string => { return this.db.notes(userId) + noteId },
     fields: {
       created: 'created',
       trashed: 'trashed'
@@ -25,27 +25,27 @@ export class UtilsService {
   actions = {
     create: {
       name: 'create',
-      title: 'Task created'
+      title: 'Note created'
     },
     edit: {
       name: 'edit',
-      title: 'Task updated'
+      title: 'Note updated'
     },
     trash: {
       name: 'trash',
-      title: 'Task trashed'
+      title: 'Note trashed'
     },
     restoreTrashed: {
       name: 'restore-trashed',
-      title: 'Task restored'
+      title: 'Note restored'
     },
     delete: {
       name: 'delete',
-      title: 'Task deleted'
+      title: 'Note deleted'
     },
     setColor: {
       name: 'set-color',
-      title: 'Task updated'
+      title: 'Note updated'
     }
   }
 

@@ -1,11 +1,11 @@
 export const environment = {
   production: true,
   firebase: {
-    apiKey: "AIzaSyBvZQ4api5soaRg9Km4rJHpXgc5vPWq9mM",
-    authDomain: "task-manager-db.firebaseapp.com",
-    databaseURL: "https://task-manager-db.firebaseio.com",
-    projectId: "task-manager-db",
-    storageBucket: "task-manager-db.appspot.com",
-    messagingSenderId: "461243367570"
+    apiKey: "AIzaSyAyIHfs6g5BmafkattKi-Z1zUxYGeop34k",
+    authDomain: "notes-14a4a.firebaseapp.com",
+    databaseURL: "https://notes-14a4a.firebaseio.com",
+    projectId: "notes-14a4a",
+    storageBucket: "",
+    messagingSenderId: "943999868994"
   }
 };

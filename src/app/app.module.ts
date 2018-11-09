@@ -5,7 +5,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { TasksComponent } from './home/tasks/tasks.component';
+import { NotesComponent } from './home/notes/notes.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './home/header/header.component';
 import { TrashComponent } from './home/trash/trash.component';
@@ -14,7 +14,7 @@ import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { TaskComponent } from './home/tasks/task/task.component';
+import { NoteComponent } from './home/notes/note/note.component';
 import { FormsModule } from '@angular/forms';
 import { FooterComponent } from './home/footer/footer.component';
 
@@ -22,13 +22,13 @@ import { FooterComponent } from './home/footer/footer.component';
   declarations: [
     AppComponent,
     LoginComponent,
-    TasksComponent,
+    NotesComponent,
     HomeComponent,
     HeaderComponent,
     FooterComponent,
     TrashComponent,
     AboutComponent,
-    TaskComponent
+    NoteComponent
   ],
   imports: [
     BrowserModule,

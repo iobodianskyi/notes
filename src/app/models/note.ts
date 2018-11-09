@@ -1,4 +1,4 @@
-export class Task {
+export class Note {
   id: string;
   note: string;
   created: Date;

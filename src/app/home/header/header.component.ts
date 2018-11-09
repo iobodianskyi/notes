@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AccountService } from 'src/app/services/account.service';
 import { AppUser } from 'src/app/models/user';
 import { Subscription } from 'rxjs';
-import { TaskService } from 'src/app/services/task.service';
+import { NoteService } from 'src/app/services/note.service';
 
 @Component({
   selector: 'app-header',
@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(
     private account: AccountService,
-    private tasksService: TaskService) { }
+    private notesService: NoteService) { }
 
   ngOnInit() {
     this.userSubscribtion = this.account.getAppUser()
@@ -26,11 +26,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   searchChanged() {
     this.search = this.search.trim();
-    this.tasksService.search$.next(this.search)
+    this.notesService.search$.next(this.search)
   }
 
   filterColor(color) {
-    this.tasksService.color$.next(color);
+    this.notesService.color$.next(color);
     this.hasColorFilter = !!color;
   }
 

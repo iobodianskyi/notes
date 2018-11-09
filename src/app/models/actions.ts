@@ -1,9 +1,9 @@
-import { Task } from "./task";
+import { Note } from "./note";
 
 export interface Action {
   info: ActionInfo;
-  newTask: Task;
-  oldTask: Task;
+  newNote: Note;
+  oldNote: Note;
 }
 
 interface ActionInfo {

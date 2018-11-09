@@ -1,26 +1,26 @@
-<div id="trashed-tasks"
+<div id="trashed-notes"
      class="main-content h-100">
   <div class="container-fluid"
-       *ngIf="trashedTasks; else loading">
+       *ngIf="trashedNotes; else loading">
     <div class="row"
-         *ngIf="trashedTasks.length; else emptyList">
-      <task class="col-12 col-sm-6 col-lg-4 col-xl-3"
-            *ngFor="let trashedTask of trashedTasks"
-            [task]=trashedTask></task>
+         *ngIf="trashedNotes.length; else emptyList">
+      <note class="col-12 col-sm-6 col-lg-4 col-xl-3"
+            *ngFor="let trashedNote of trashedNotes"
+            [note]=trashedNote></note>
     </div>
 
     <ng-template #emptyList>
       <div *ngIf="!allTrashedLength; else notfound"
            class="position-absolute absolute-center">
         <div class="boxed no-one-box">
-          <div class="loader no-select text-center">There is no trashed tasks</div>
+          <div class="loader no-select text-center">There is no trashed notes</div>
         </div>
       </div>
 
       <ng-template #notfound>
         <div class="position-absolute absolute-center">
           <div class="boxed no-one-box">
-            <div class="loader no-select text-center">No tasks found</div>
+            <div class="loader no-select text-center">No notes found</div>
           </div>
         </div>
       </ng-template>
