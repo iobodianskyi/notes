@@ -14,7 +14,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   userSubscribtion: Subscription;
   search: string;
   hasColorFilter: boolean = false;
-  colorFilter: string = '';
 
   constructor(
     private account: AccountService,

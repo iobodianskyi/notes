@@ -1,6 +1,7 @@
 // common
 
 $gray: #C6C2C2
+$gray-2: #a09f9f
 $font-color: #707070
 $placeholder: #dedede
 $color-1: #62ACB4
@@ -336,6 +337,7 @@ header
   left: 30px
   right: 30px
   height: 40px
+  color: $gray-2
 
   .line-footer
     width: 50%
@@ -343,11 +345,16 @@ header
     background: #fff
     border-radius: 20px
 
-  .undo-box
-    color: #a09f9f
+  .social
+    opacity: 0.3
+    width: 22px
+    height: 22px
+    margin-right: 20px
 
+    &:hover
+      opacity: 1
 
-  // media
+// media
 
 // Extra small devices (portrait phones, less than 576px)
 @media (max-width: 575.98px)
