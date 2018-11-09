@@ -23,7 +23,7 @@ export class TrashComponent implements OnInit, OnDestroy {
         this.allTrashedLength = tasks.length;
         this.trashedTasks = tasks
           .filter((task: Task) =>
-            task.note.includes(search) &&
+            task.note.toLowerCase().includes(search.toLowerCase()) &&
             task.color.includes(color));
       });
   }

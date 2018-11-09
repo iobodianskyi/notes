@@ -23,7 +23,7 @@ export class TasksComponent implements OnInit, OnDestroy {
         this.allTasksLength = tasks.length;
         this.tasks = tasks
           .filter((task: Task) =>
-            task.note.includes(search) &&
+            task.note.toLowerCase().includes(search.toLowerCase()) &&
             task.color.includes(color));
       });
   }
@@ -38,7 +38,7 @@ export class TasksComponent implements OnInit, OnDestroy {
         color: '',
         trashed: false
       };
-      
+
       this.taskService.create(task)
         .catch(console.log);
 
