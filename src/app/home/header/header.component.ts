@@ -24,6 +24,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .subscribe(user => { this.user = user });
   }
 
+  toggleMenu() {
+    this.menuCollapsed = !this.menuCollapsed;
+  }
+
+  hideNavMenu() {
+    this.menuCollapsed = false;
+  }
+
   searchChanged() {
     this.search = this.search.trim();
     this.notesService.search$.next(this.search)

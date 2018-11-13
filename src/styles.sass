@@ -14,6 +14,10 @@ $radius: 10px
 $content-radius: 50px
 $border: 2px solid $gray
 
+html,
+body
+  overflow: hidden
+
 body
   background-color: $gray
   color: $gray
@@ -126,6 +130,7 @@ input::placeholder
   .login-container
     button
       margin: 10px
+      background: none
 
     button:hover
       color: $font-color
@@ -161,6 +166,9 @@ header
     background-color: $gray
     border-radius: 0 0 $content-radius $content-radius
 
+    .clear-color
+      color: #fff
+
   #search
     background: none !important
     border: none !important
@@ -185,6 +193,58 @@ header
   .logout
     width: 25px
     margin-left: 10px
+
+  .nav-toggle
+    position: relative
+    z-index: 350
+
+    .toggle-item
+      width: 20px
+      height: 4px
+      margin: 2px
+      border-radius: 5px
+      background: #fff
+
+  .mobile-nav
+    position: relative
+    z-index: 300
+    transform: translateY(-100%)
+    top: -35px
+    font-size: 25px
+
+    &.collapsed 
+      transform: translateY(40px)
+
+    .nav-content
+      overflow: scroll
+      max-height: calc(100vh - 75px)
+      border-radius: 10px
+      background: $gray
+      color: #fff
+
+      .nav-item
+        color: #fff
+        margin: 10px
+
+        &:first-child
+          margin-top: 10px
+
+        &:last-child
+          margin-bottom: 10px
+
+  .overlay
+    display: none
+    position: fixed
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    z-index: 250
+    background: #000
+    opacity: 0.5
+
+    &.collapsed
+      display: block
 
 .color-option
   height: 25px
@@ -331,11 +391,21 @@ header
 
     &:hover
       opacity: 1
+  
+  .undo-box
+    font-size: 14px
 
 // media
 
 // Extra small devices (portrait phones, less than 576px)
 @media (max-width: 575.98px)
+  .full-wrap
+    padding: 0
+
+  .wrap-border
+    border: none
+    border-radius: 0
+
   #login
     .main-title
       font-size: 30px
@@ -344,7 +414,25 @@ header
       margin: 10px 10px 50px
       font-size: 18px
 
+  .note-wrap .options
+    top: 0
+
+  header
+    height: 40px
+
+    .head
+      height: 30px
+
+    #search
+      font-size: 16px
+      max-width: 125px
+
+  .content
+    max-height: calc(100vh - 190px)
+
   #footer
+    bottom: 0
+
     .line-footer
       width: 100%
 
@@ -353,12 +441,36 @@ header
 
 // // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) and (max-width: 767.98px)
-  #footer .social
-    margin-right: 5px
+  .note-wrap .options
+    top: 0
+
+  header
+    height: 40px
+
+    .color-option
+      max-width: 100px
+
+  header
+    .head
+      height: 30px
+
+    #search
+      font-size: 16px
+
+  .content
+    max-height: calc(100vh - 190px)
+
+  // #footer
+  //   bottom: 10px
+
+  //   .social
+  //     margin-right: 5px
 
 
 // // Medium devices (tablets, 768px and up)
-// @media (min-width: 768px) and (max-width: 991.98px)
+@media (min-width: 768px) and (max-width: 991.98px)
+  header .color-option
+    max-width: 110px
 
 // // Large devices (desktops, 992px and up)
 // @media (min-width: 992px) and (max-width: 1199.98px)
