@@ -5,7 +5,10 @@
     <div class="row"
          *ngIf="trashedNotes.length; else emptyList">
       <div class="col-12 text-center">
-        <button class="app-btn" (click)="emptyTrash()">Empty trash</button>
+        <p>
+          <button class="app-btn"
+                  (click)="emptyTrash()">Empty trash</button>
+        </p>
       </div>
       <note class="col-12 col-sm-6 col-lg-4 col-xl-3"
             *ngFor="let trashedNote of trashedNotes"
