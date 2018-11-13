@@ -55,6 +55,19 @@ export class NoteService {
       .delete();
   }
 
+  emptyTrash() {
+    const batch = this.firebaseStore.firestore.batch();
+    const userId = this.account.getUser().uid;
+    const notesPath = this.utils.db.notes(userId);
+    return this.firebaseStore.firestore.collection(notesPath)
+      .where(this.utils.db.fields.trashed, '==', true)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach(doc => batch.delete(doc.ref));
+        batch.commit();
+      });
+  }
+
   private queryNotes() {
     return (ref: firebase.firestore.CollectionReference) => {
       let query = ref

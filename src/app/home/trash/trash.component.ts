@@ -28,6 +28,10 @@ export class TrashComponent implements OnInit, OnDestroy {
       });
   }
 
+  emptyTrash() {
+    this.noteService.emptyTrash();
+  }
+
   ngOnDestroy() {
     this.filteredNotes.unsubscribe();
   }
