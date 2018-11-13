@@ -1,4 +1,4 @@
-<div class="note-wrap position-relative">
+<div class="note-wrap position-relative" (mouseleave)="optionsDropdown.close()">
   <div class="options-container animated"
        ngClass={{note.color}}></div>
   <div class="options-container-left"></div>
@@ -15,7 +15,7 @@
       <div class="color pointer color-5"
            (click)="setColor('color-5')"></div>
     </div>
-    <div ngbDropdown
+    <div ngbDropdown #optionsDropdown="ngbDropdown"
          placement="bottom-center"
          class="color-option option">
       <button class="btn p-0 no-outline h-100 border-0"
