@@ -28,7 +28,7 @@
       </button>
       <div ngbDropdownMenu class="border-0">
         <button class="dropdown-item"
-                *ngIf="!note.trashed"
+                *ngIf="note.color"
                 (click)="resetColor()">
           Reset color
         </button>
