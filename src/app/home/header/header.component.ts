@@ -3,6 +3,9 @@ import { AccountService } from 'src/app/services/account.service';
 import { AppUser } from 'src/app/models/user';
 import { Subscription } from 'rxjs';
 import { NoteService } from 'src/app/services/note.service';
+import { CleanUpService } from 'src/app/services/cleanup.service';
+import { Router } from '@angular/router';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-header',
@@ -16,8 +19,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   hasColorFilter: boolean = false;
 
   constructor(
+    private router: Router,
+    private utils: UtilsService,
     private account: AccountService,
-    private notesService: NoteService) { }
+    private notesService: NoteService,
+    private clenup: CleanUpService) { }
 
   ngOnInit() {
     this.userSubscribtion = this.account.getAppUser()
@@ -43,7 +49,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    this.account.logout();
+    this.account.logout()
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        this.clenup.cleanUpAppData();
+        this.router.navigate([this.utils.routes.root]);
+      });
   }
 
   ngOnDestroy() {

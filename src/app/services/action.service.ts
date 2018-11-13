@@ -78,10 +78,15 @@ export class ActionService {
   nextAction(lastAction: Action) {
     this.lastAction = lastAction;
     this.lastAction$.next(lastAction);
-    
+
     clearTimeout(this.timerRemovingUndoAction);
     this.timerRemovingUndoAction = setTimeout(() => {
       this.lastAction$.next(null);
     }, this.utils.delays.undoActionPresence);
+  }
+
+  clearLastAction() {
+    clearTimeout(this.timerRemovingUndoAction);
+    this.lastAction$.next(null);
   }
 }

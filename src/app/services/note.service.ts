@@ -16,6 +16,11 @@ export class NoteService {
     private account: AccountService,
     private utils: UtilsService) { }
 
+  setDefaults() {
+    this.search$.next('');
+    this.color$.next('');
+  }
+
   getAll(): Observable<Note[]> {
     const userId = this.account.getUser().uid;
     const notesPath = this.utils.db.notes(userId);

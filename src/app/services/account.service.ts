@@ -34,7 +34,7 @@ export class AccountService {
   }
 
   getUser(): User {
-    return this.firebaseAuth.auth.currentUser;
+     return this.firebaseAuth.auth.currentUser;
   }
 
   login(provider) {
@@ -62,12 +62,6 @@ export class AccountService {
   }
 
   logout() {
-    this.firebaseAuth.auth.signOut()
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        this.router.navigate([this.utils.routes.root]);
-      });
+    return this.firebaseAuth.auth.signOut();
   }
 }
