@@ -11,6 +11,7 @@ export class NotesComponent implements OnInit, OnDestroy {
   notes: Note[];
   allNotesLength: number = 0;
   filteredNotes: Subscription;
+  focused = false;
 
   constructor(private noteService: NoteService) { }
 
@@ -44,6 +45,8 @@ export class NotesComponent implements OnInit, OnDestroy {
 
       editElement.textContent = '';
     }
+
+    this.focused = false;
   }
 
   ngOnDestroy() {
