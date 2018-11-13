@@ -1,65 +1,67 @@
-
 // common
 
-$header-height: 60px
-$offset: 14px
-$sidebar-width: 250px
-$box-shadow: 0 0px 1px rgba(0, 0, 0, 0.16), 0 0px 2px rgba(0, 0, 0, 0.23)
-$box-shadow-focused: 0 0px 10px rgba(0, 0, 0, 0.16), 0 1px 10px rgba(0, 0, 0, 0.23)
-$background-gray: #f8f9fb
-$gray: #6d7e8e
-$placeholder: #afafaf
-$teal: #009688
-$blue: #2196f3
-$deep-orange: #ff5722
-$amber: #ffc107
-$brown: #795548
+$gray: #C6C2C2
+$gray-2: #a09f9f
+$font-color: #707070
+$placeholder: #dedede
+$color-1: #62ACB4
+$color-2: #B1B264
+$color-3: #F4B86D
+$color-4: #E3B6B6
+$color-5: #FC7042
 $transition: .15s ease-in-out
 $radius: 10px
+$content-radius: 50px
+$border: 2px solid $gray
+
+html,
+body
+  overflow: hidden
 
 body
-  background-color: $background-gray
+  background-color: $gray
   color: $gray
+
+// .not-normal
+//   transform: scale(1.3)
+
+//   &.normal
+//     transform: scale(1)
 
 a
   color: $gray
   text-transform: none
   text-decoration: none
 
-  &:hover
-    color: $gray
+  &:hover,
+  &.active
+    color: $font-color
     text-transform: none
     text-decoration: none
 
 .boxed
   background-color: #fff
-  box-shadow: $box-shadow
+  border-radius: $radius 
+
+.btn
   border-radius: $radius
+  color: $gray
 
 .app-btn
   width: 150px
   padding: 5px
   font-size: 12px
-  border: 1px solid transparent
+  border: $border
   border-radius: $radius
   transition: $transition
   outline: 0 !important
   user-select: none
   cursor: pointer
+  color: $gray
 
-  &.primary
-    margin-bottom: 10px
-    height: 32px
-    line-height: 15px
-    color: rgba(255,255,255,.85)
-    background-color: #6284f3
-  
-  i.fa
-    float: left
-    line-height: 15px 
-
-  &.primary:hover
-    background-color: #3e68f0
+  &.lg
+    font-size: 15px
+    padding: 10px 20px
 
 input::placeholder
   color: $placeholder !important
@@ -77,245 +79,399 @@ input::placeholder
   outline: none
 
 .absolute-center
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
 
-.teal
-  color: $teal
+.color-1
+  border-color: $color-1 !important
 
-.blue
-  color: $blue
+.color-2
+  border-color: $color-2 !important
 
-.deep-orange
-  color: $deep-orange
+.color-3
+  border-color: $color-3 !important
 
-.amber
-  color: $amber
+.color-4
+  border-color: $color-4 !important
 
-.amber
-  color: $amber
+.color-5
+  border-color: $color-5 !important
 
-.brown
-  color: $brown
+.dropdown
+  button
+    box-shadow: none !important
+    color: $gray !important
+    outline: none !important
+    cursor: pointer
+
+    &:active
+      background-color: transparent !important
+
+    &::after
+      display: none
 
 // pages
 
 // login
-.home-background
-  height: 100vh
-  background: url('assets/img/home-background.jpg') center center no-repeat
-  background-size: contain
-  background-color: #f7f8fa
-
+#login
   .content
-    height: 100vh
+    height: calc(100% - 30px)
+    max-height: 100%
 
-    .login-logo
-      font-size: 70px
-      margin-bottom: 30px
+  .main-title
+    margin: 10px 10px 30px
+    font-size: 50px
 
-    .main-title
+  .main-description
+    margin: 10px 10px 100px
+    font-size: 20px
+
+  .login-container
+    button
       margin: 10px
-      font-size: 50px
+      background: none
 
-    .main-description
-      margin: 30px
-      font-size: 20px
+    button:hover
+      color: $font-color
 
-    hr
-      margin: 30px
+.full-wrap
+  height: 100vh
+  padding: 10px
 
-    .login-container
-      max-width: 300px
-      padding: $offset
-      border-radius: $radius
-      box-shadow: 0 0px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+.wrap-border
+  padding: 10px 10px 40px 10px
+  border: 10px solid #fff
+  border-radius: $content-radius
 
-      .sing-text
-        margin-bottom: $offset
-        font-size: 12px
+.wrap-content
+  background-color: #fff
+  border-radius: 35px
+  overflow: hidden
+
+.content
+  max-height: calc(100vh - 260px)
+  overflow-y: auto
 
 // header
 header
-  position: fixed
-  top: $offset
-  right: $offset
-  left: $offset
-  height: $header-height
+  height: 70px
 
-  .header-item
-    margin-left: 10px
-    margin-right: 10px
+  .head-link
+    margin-left: 20px
 
-    &:first-child
-      margin-left: $offset
+  .head
+    height: 50px
+    margin: 0 10px
+    background-color: $gray
+    border-radius: 0 0 $content-radius $content-radius
 
-    &:last-child
-      margin-right: $offset
+    .clear-color
+      color: #fff
 
-    .nested-item
-      margin-left: 10px
-      margin-right: 10px
-
-      &:first-child
-        margin-left: 0
-
-      &:last-child
-        margin-right: 0
-
-  .icon
-    font-size: 25px
-    line-height: $header-height
-
-    &.collapsed
-      transform: rotate(90deg)
-
-  .logo
-    font-size: 40px
-
-  .logo-title
-    font-size: 20px
-    text-shadow: 0 1px 1px #c1bfbf
-    white-space: nowrap
-
-  .search-container
-    border: 1px solid #ced4da
-    border-radius: $radius
+  #search
+    background: none !important
+    border: none !important
+    box-shadow: none
+    color: #fff
+    font-size: 22px
+    letter-spacing: 2px
     
-    &:focus-within
-      box-shadow: $box-shadow
+    &::placeholder
+      color: #fff !important 
 
-    label
-      margin: 0
-
-      i
-        padding: 10px
-        font-size: 18px
-
-    input
-      border: 0 !important
-      border-radius: $radius
-      box-shadow: none !important
-
-  .fa-square
-    margin: 0 5px
-    font-size: 20px
+  .color-option
+    max-width: 140px
+    width: 140px
 
   .user-logo
     width: 35px
     height: 35px
+    margin-left: 10px
     border-radius: 50%
 
-// sidebar
-#sidebar
-  position: fixed
-  top: ($header-height + $offset * 2)
-  bottom: $offset
-  left: $offset
-  width: $sidebar-width
-  padding-top: 10px
-  overflow-y: auto
+  .logout
+    width: 25px
+    margin-left: 10px
 
-  &.collapsed
-    transform: translateX(-100%)
+  .nav-toggle
+    position: relative
+    z-index: 350
 
-  .nav-item
-    padding: 5px 0
-    cursor: pointer
+    .toggle-item
+      width: 20px
+      height: 4px
+      margin: 2px
+      border-radius: 5px
+      background: #fff
 
-    &:hover,
-    &.active
-      font-weight: bold
-  
-    .fa
-      margin: 0 $offset
+  .mobile-nav
+    position: relative
+    z-index: 300
+    transform: translateY(-100%)
+    top: -35px
+    font-size: 25px
 
-    .fa-sign-out
-      transform: rotate(180deg)
+    &.collapsed 
+      transform: translateY(40px)
 
-    hr
-      margin: 10px $offset 0px $offset
+    .nav-content
+      overflow: scroll
+      max-height: calc(100vh - 75px)
+      border-radius: 10px
+      background: $gray
+      color: #fff
 
-// home-content
+      .nav-item
+        color: #fff
+        margin: 10px
 
-#home-content
-  position: fixed
-  top: ($header-height + $offset * 2)
-  right: $offset
-  bottom: $offset
-  left: ($sidebar-width + $offset * 2)
+        &:first-child
+          margin-top: 10px
 
-// components shared
+        &:last-child
+          margin-bottom: 10px
 
-.task-box
-  max-height: 150px
-  transition: $transition
-  overflow-y: auto
+  .overlay
+    display: none
+    position: fixed
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    z-index: 250
+    background: #000
+    opacity: 0.5
 
-  &.focused
-    box-shadow: $box-shadow-focused
-
-  .editable
-    padding: 10px
-    cursor: text
-
-    &:empty:before
-      content: attr(placeholder)
+    &.collapsed
       display: block
-      color: $placeholder
 
-.main-content
-  padding: $offset
-  overflow-y: auto
+.color-option
+  height: 25px
+  margin-right: 10px
 
-// tasks
+  &:last-child 
+    margin-right: 0
 
-#tasks
-  padding: $offset 0
+  .color
+    width: 100%
+    height: 25px
+    border: 3px solid
+    border-left: none
+    border-right: none
+    background-color: transparent
 
-  .container-fluid
-    padding-left: 7px
-    padding-right: 7px
+    &:first-child,
+    &:last-child
+      border: 3px solid
+      border-radius: 7px
 
-    .row
-      margin: 0
+    &:first-child
+      border-right: none
+      border-top-right-radius: 0
+      border-bottom-right-radius: 0
 
-  .no-one-box
-    padding: 30px
+    &:last-child
+      border-left: none
+      border-top-left-radius: 0
+      border-bottom-left-radius: 0
 
-  .create-box
-    max-width: 300px
-    margin: 0 auto
-    padding: 0 14px
+.note-wrap
+  overflow: hidden
 
-  .loader
-    color: #adacac;
-    font-size: 30px
+  .note-head
+    height: 15px
+    background: #fff
 
-task
-  margin-top: $offset
-  padding: 0 7px !important
+  .options-container
+    position: absolute
+    top: 5px
+    left: 50%
+    transform: translateX(-50%)
+    height: 30px
+    background: #fff
+    border: $border
+    border-top: none
+    border-radius: 20px
+
+  &:hover 
+    .options-container
+      top: 5px
+
+    .options
+      top: 0
+
+  .options
+    top: -25px
+    left: 50%
+    padding: 0 10px
+    transform: translateX(-50%)
+    z-index: 200
+
+    .dot
+      width: 5px
+      height: 5px
+      background-color: $gray
+      border-radius: 50%
+
+    .dropdown-menu
+      background: $gray
+
+      .dropdown-item
+        padding: 3px 10px
+        color: #fff !important
+        background-color: $gray !important
+
+    .option-img
+      width: 25px
+
+  .options-container, .options
+    width: 55%
+
+  // .options-container-left
+  //   position: absolute
+  //   top: 10px
+  //   width: 50px
+  //   left: 24px
+  //   height: 30px
+  //   background: #fff
+  //   border: 2px solid #C6C2C2
+  //   border-radius: 7px
+  //   border-bottom-color: #fff
+  //   border-left: none
+  //   border-top-left-radius: 0
+
+  .note-box
+    height: 135px
+    margin-bottom: 10px
+    padding-top: 10px
+    padding-bottom: 10px
+    border: $border
+    border-radius: 22px
+
+    .edit-box
+      padding: 0 10px 10px 10px
+      overflow: auto
+
+    &.focused
+
+    .editable
+      padding: 10px
+      cursor: text
+      color: $font-color
+
+      &:empty:before
+        content: attr(placeholder)
+        display: block
+        color: $placeholder
+
+    &.create-box
+      width: 300px
+      height: 70px
+      margin: 10px auto 20px auto
+
+#footer
+  position: fixed
+  bottom: 20px
+  left: 30px
+  right: 30px
+  height: 40px
+  color: $gray-2
+
+  .line-footer
+    width: 50%
+    height: 10px
+    background: #fff
+    border-radius: 20px
+
+  .social
+    opacity: 0.3
+    width: 22px
+    height: 22px
+    margin-right: 20px
+
+    &:hover
+      opacity: 1
   
-  .task-box
-    height: 90px
+  .undo-box
+    font-size: 14px
 
 // media
 
 // Extra small devices (portrait phones, less than 576px)
 @media (max-width: 575.98px)
-  .home-background .content .main-title
-    font-size: 30px
+  .full-wrap
+    padding: 0
 
-  .home-background .content .login-logo
-    font-size: 50px
-    margin-bottom: 0
+  .wrap-border
+    border: none
+    border-radius: 0
+
+  #login
+    .main-title
+      font-size: 30px
+
+    .main-description
+      margin: 10px 10px 50px
+      font-size: 18px
+
+  .note-wrap .options
+    top: 0
+
+  header
+    height: 40px
+
+    .head
+      height: 30px
+
+    #search
+      font-size: 16px
+      max-width: 125px
+
+  .content
+    max-height: calc(100vh - 190px)
+
+  #footer
+    bottom: 0
+
+    .line-footer
+      width: 100%
+
+    .social
+      margin-right: 1px
 
 // // Small devices (landscape phones, 576px and up)
-// @media (min-width: 576px) and (max-width: 767.98px)
+@media (min-width: 576px) and (max-width: 767.98px)
+  .note-wrap .options
+    top: 0
+
+  header
+    height: 40px
+
+    .color-option
+      max-width: 100px
+
+  header
+    .head
+      height: 30px
+
+    #search
+      font-size: 16px
+
+  .content
+    max-height: calc(100vh - 190px)
+
+  // #footer
+  //   bottom: 10px
+
+  //   .social
+  //     margin-right: 5px
+
 
 // // Medium devices (tablets, 768px and up)
-// @media (min-width: 768px) and (max-width: 991.98px)
+@media (min-width: 768px) and (max-width: 991.98px)
+  header .color-option
+    max-width: 110px
 
 // // Large devices (desktops, 992px and up)
 // @media (min-width: 992px) and (max-width: 1199.98px)

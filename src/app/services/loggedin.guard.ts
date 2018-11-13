@@ -22,7 +22,7 @@ export class LoggedInGuard implements CanActivate {
         take(1),
         map(user => !(!!user)),
         tap(notLoggedIn => {
-          if (!notLoggedIn) this.router.navigate([this.utils.routes.tasks]);
+          if (!notLoggedIn) this.router.navigate([this.utils.routes.notes]);
         })
       )
   }

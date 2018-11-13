@@ -1,0 +1,43 @@
+<div id="trashed-notes"
+     class="main-content h-100">
+  <div class="container-fluid"
+       *ngIf="trashedNotes; else loading">
+    <div class="row"
+         *ngIf="trashedNotes.length; else emptyList">
+      <div class="col-12 text-center">
+        <p>
+          <button class="app-btn"
+                  (click)="emptyTrash()">Empty trash</button>
+        </p>
+      </div>
+      <note class="col-12 col-sm-6 col-lg-4 col-xl-3"
+            *ngFor="let trashedNote of trashedNotes"
+            [note]=trashedNote></note>
+    </div>
+
+    <ng-template #emptyList>
+      <div *ngIf="!allTrashedLength; else notfound"
+           class="position-absolute absolute-center">
+        <div class="boxed no-one-box">
+          <div class="loader no-select text-center">There is no trashed notes</div>
+        </div>
+      </div>
+
+      <ng-template #notfound>
+        <div class="position-absolute absolute-center">
+          <div class="boxed no-one-box">
+            <div class="loader no-select text-center">No notes found</div>
+          </div>
+        </div>
+      </ng-template>
+    </ng-template>
+  </div>
+
+  <ng-template #loading>
+    <div class="position-absolute absolute-center">
+      <div class="boxed no-one-box">
+        <div class="loader no-select text-center">Loading...</div>
+      </div>
+    </div>
+  </ng-template>
+</div>

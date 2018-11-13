@@ -1,6 +1,6 @@
-# Task Manager
+# Notes
 
-Single page app for managing daily tasks. Built with [Angular](https://angular.io/)
+Single page app for managing daily notes. Built with [Angular](https://angular.io/) and [Firebase](https://firebase.google.com/)
 
 ## Get started
 

@@ -5,18 +5,18 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyBvZQ4api5soaRg9Km4rJHpXgc5vPWq9mM",
-    authDomain: "task-manager-db.firebaseapp.com",
-    databaseURL: "https://task-manager-db.firebaseio.com",
-    projectId: "task-manager-db",
-    storageBucket: "task-manager-db.appspot.com",
-    messagingSenderId: "461243367570"
+    apiKey: "AIzaSyAyIHfs6g5BmafkattKi-Z1zUxYGeop34k",
+    authDomain: "notes-14a4a.firebaseapp.com",
+    databaseURL: "https://notes-14a4a.firebaseio.com",
+    projectId: "notes-14a4a",
+    storageBucket: "",
+    messagingSenderId: "943999868994"
   }
 };
 
 /*
  * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
+ * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeNote`.
  *
  * This import should be commented out in production mode because it will have a negative impact
  * on performance if an error is thrown.

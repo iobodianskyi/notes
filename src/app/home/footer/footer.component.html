@@ -1,0 +1,44 @@
+<div id="footer"
+     class="no-select row align-items-center">
+  <div class="col-6 col-md-4 p-0">
+    <div class="text-center"
+         [ngClass]="{'invisible': !lastAction}">
+      <div class="undo-box">
+        <span [innerHtml]="lastActionTitle"></span>:
+        <span class="pointer"
+              (click)="undoAction()">
+          <b>undo</b>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="d-none d-md-block col-4 p-0">
+    <div class="line-footer m-auto"></div>
+  </div>
+  <div class="col-6 col-md-4 p-0 text-center">
+    <a href="https://www.instagram.com/iobodianskyi"
+       target="_blank">
+      <img class="social"
+           src="/assets/img/insta.svg"
+           alt="Ivan Obodianskyi on Instagram">
+    </a>
+    <a href="https://www.facebook.com/ivan.obodianskyi"
+       target="_blank">
+      <img class="social"
+           src="/assets/img/fb.svg"
+           alt="Ivan Obodianskyi on Facebook">
+    </a>
+    <a href="https://github.com/iobodianskyi"
+       target="_blank">
+      <img class="social"
+           src="/assets/img/git.svg"
+           alt="Ivan Obodianskyi on GitHub">
+    </a>
+    <a href="https://www.linkedin.com/in/ivan-obodianskyi/"
+       target="_blank">
+      <img class="social"
+           src="/assets/img/link.svg"
+           alt="Ivan Obodianskyi on LinnkedIn">
+    </a>
+  </div>
+</div>
