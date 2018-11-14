@@ -22,18 +22,12 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   connectWithFacebook() {
     let facebookProvider = new auth.FacebookAuthProvider();
-    this.account.login(facebookProvider)
-      .catch((error) => {
-        console.log(error)
-      });
+    this.account.login(facebookProvider);
   }
 
   connectWithGoogle() {
     let googleProvider = new auth.GoogleAuthProvider();
-    this.account.login(googleProvider)
-      .catch((error) => {
-        console.log(error)
-      });
+    this.account.login(googleProvider);
   }
 
   ngOnDestroy() {

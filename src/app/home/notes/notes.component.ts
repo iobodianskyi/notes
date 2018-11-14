@@ -40,8 +40,7 @@ export class NotesComponent implements OnInit, OnDestroy {
         trashed: false
       };
 
-      this.noteService.create(note)
-        .catch(console.log);
+      this.noteService.create(note);
 
       editElement.textContent = '';
     }

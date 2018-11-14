@@ -4,6 +4,7 @@ import { AccountService } from './account.service';
 import { Observable } from 'rxjs';
 import { tap, map, take } from 'rxjs/operators';
 import { UtilsService } from './utils.service';
+import { LoaderService } from './loader.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
@@ -11,17 +12,21 @@ export class AuthGuard implements CanActivate {
   constructor(
     private account: AccountService,
     private router: Router,
+    private loader: LoaderService,
     private utils: UtilsService) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> {
 
+    this.loader.add();
+
     return this.account.getAuthState()
       .pipe(
         take(1),
         map(user => !!user),
         tap(loggedIn => {
+          this.loader.remove();
           if (!loggedIn) this.router.navigate([this.utils.routes.root]);
         })
       )

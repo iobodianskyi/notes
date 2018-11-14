@@ -50,9 +50,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   logout() {
     this.account.logout()
-      .catch((error) => {
-        console.log(error);
-      })
       .finally(() => {
         this.clenup.cleanUpAppData();
         this.router.navigate([this.utils.routes.root]);

@@ -34,14 +34,11 @@ export class AccountService {
   }
 
   getUser(): User {
-     return this.firebaseAuth.auth.currentUser;
+    return this.firebaseAuth.auth.currentUser;
   }
 
   login(provider) {
-    return this.firebaseAuth.auth.signInWithPopup(provider)
-      .then((credential: firebase.auth.UserCredential) => {
-        this.updateAppUser(credential.user);
-      })
+    this.firebaseAuth.auth.signInWithRedirect(provider);
   }
 
   updateAppUser(user: User) {
@@ -55,10 +52,7 @@ export class AccountService {
       photoUrl: user.photoURL
     };
 
-    userDocument.set(updateUser, { merge: true })
-      .catch((error) => {
-        console.log(error);
-      });
+    userDocument.set(updateUser, { merge: true });
   }
 
   logout() {
