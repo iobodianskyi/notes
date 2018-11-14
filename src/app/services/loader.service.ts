@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class LoaderService {
   public loaders$: Observable<number>;
-  private loadersSubject = new BehaviorSubject<number>(0);
+  private loadersSubject = new Subject<number>();
   private loaders: number[] = [];
 
   constructor() {

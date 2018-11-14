@@ -1,21 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewChecked } from '@angular/core';
 import { LoaderService } from './services/loader.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
-export class AppComponent {
-  loaders: number;
+export class AppComponent implements AfterViewChecked {
+  hasLoader = true;
 
-  constructor(private loader: LoaderService) {
+  constructor(private loader: LoaderService) { }
+
+  ngAfterViewChecked() {
     this.updateLoader();
   }
 
   updateLoader() {
     this.loader.loaders$
       .subscribe((length: number) => {
-        this.loaders = length;
+        this.hasLoader = !!length;
       });
   }
 }
