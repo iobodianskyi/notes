@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   user: AppUser;
   userSubscribtion: Subscription;
   search: string;
-  hasColorFilter: boolean = false;
+  hasColorFilter = false;
 
   constructor(
     private router: Router,
@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.userSubscribtion = this.account.getAppUser()
-      .subscribe(user => { this.user = user });
+      .subscribe(user => { this.user = user; });
   }
 
   toggleMenu() {
@@ -40,7 +40,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   searchChanged() {
     this.search = this.search.trim();
-    this.notesService.search$.next(this.search)
+    this.notesService.search$.next(this.search);
   }
 
   filterColor(color) {

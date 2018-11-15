@@ -16,7 +16,7 @@ export class AccountService {
     private utils: UtilsService) {
     this.firebaseAuth.authState
       .subscribe((user) => {
-        if (!user) this.router.navigate([this.utils.routes.root]);
+        if (!user) { this.router.navigate([this.utils.routes.root]); }
       });
   }
 

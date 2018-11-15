@@ -20,7 +20,7 @@
          *ngIf="notes.length; else emptyList">
       <div class="col-12 col-sm-6 col-lg-4 col-xl-3"
            *ngFor="let note of notes">
-        <note [note]=note></note>
+        <app-note [note]=note></app-note>
       </div>
     </div>
 

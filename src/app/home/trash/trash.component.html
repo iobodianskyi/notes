@@ -10,9 +10,9 @@
                   (click)="emptyTrash()">Empty trash</button>
         </p>
       </div>
-      <note class="col-12 col-sm-6 col-lg-4 col-xl-3"
+      <app-note class="col-12 col-sm-6 col-lg-4 col-xl-3"
             *ngFor="let trashedNote of trashedNotes"
-            [note]=trashedNote></note>
+            [note]=trashedNote></app-note>
     </div>
 
     <ng-template #emptyList>

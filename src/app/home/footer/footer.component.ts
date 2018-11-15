@@ -21,8 +21,7 @@ export class FooterComponent implements OnInit, OnDestroy {
         if (action) {
           this.lastAction = action.info.name;
           this.lastActionTitle = action.info.title;
-        }
-        else {
+        } else {
           this.resetAction();
         }
       });

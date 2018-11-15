@@ -9,7 +9,7 @@ import { combineLatest, Subscription } from 'rxjs';
 })
 export class TrashComponent implements OnInit, OnDestroy {
   trashedNotes: Note[];
-  allTrashedLength: number = 0;
+  allTrashedLength = 0;
   filteredNotes: Subscription;
 
   constructor(private noteService: NoteService) { }
