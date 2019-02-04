@@ -1,4 +1,4 @@
-import { Note } from "./note";
+import { Note } from './note';
 
 export interface Action {
   info: ActionInfo;
@@ -7,6 +7,6 @@ export interface Action {
 }
 
 interface ActionInfo {
-  name: string,
-  title: string
+  name: string;
+  title: string;
 }

@@ -20,6 +20,34 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-## Further help
+## Deployment
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Firebase Hosting uses for hosting the app.
+
+### Building the Production Code
+
+Run `ng build --prod`
+
+### Deploying to Firebase
+
+First, make sure you have the firebase tools package installed.
+
+`npm install -g firebase-tools`
+
+Second, log into your existing firebase account
+
+`firebase login`
+
+Third, initialize the project
+
+`firebase init`
+
+For the most part, you can stick with the default settings, except for the following questions:
+ 1. Choose hosting on the first question.
+ 2. Change public folder to dist/notes when asked (it defaults to public).
+ 3. Configure as single page app? - Yes
+ 4. If firebase asks to overwrite your index.html file, just say NO.
+
+### Deploy
+
+`firebase deploy`

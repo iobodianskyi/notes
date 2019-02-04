@@ -18,19 +18,19 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.login$ = this.account.getAuthState()
       .subscribe((user) => {
-        if (user) this.router.navigate([this.utils.routes.notes]);
+        if (user) { this.router.navigate([this.utils.routes.notes]); }
       });
 
     this.loader.remove();
   }
 
   connectWithFacebook() {
-    let facebookProvider = new auth.FacebookAuthProvider();
+    const facebookProvider = new auth.FacebookAuthProvider();
     this.account.login(facebookProvider);
   }
 
   connectWithGoogle() {
-    let googleProvider = new auth.GoogleAuthProvider();
+    const googleProvider = new auth.GoogleAuthProvider();
     this.account.login(googleProvider);
   }
 

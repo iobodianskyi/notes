@@ -1,23 +1,26 @@
-import { Component, AfterViewChecked } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LoaderService } from './services/loader.service';
+import { AccountService } from './services/account.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
-export class AppComponent implements AfterViewChecked {
+export class AppComponent implements OnInit {
   hasLoader = true;
 
-  constructor(private loader: LoaderService) { }
+  constructor(private loader: LoaderService, private account: AccountService) { }
 
-  ngAfterViewChecked() {
+  ngOnInit(): void {
     this.updateLoader();
+
+    this.account.checkRedirectSignUp();
   }
 
   updateLoader() {
     this.loader.loaders$
       .subscribe((length: number) => {
-        this.hasLoader = !!length;
+        setTimeout(() => { this.hasLoader = !!length; });
       });
   }
 }

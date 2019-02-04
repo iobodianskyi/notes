@@ -1,0 +1,14 @@
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      function isSignedIn() { return request.auth != null; }
+      function isCurrentUser() { return isSignedIn() && request.auth.uid == userId; }
+      
+      allow get, create, update: if isCurrentUser();
+      
+      match /notes/{noteId} {
+         allow read, write: if isCurrentUser();
+   	  }
+    }
+  }
+}

@@ -4,7 +4,7 @@ import { ActionService } from 'src/app/services/action.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
-  selector: 'note',
+  selector: 'app-note',
   templateUrl: './note.component.html'
 })
 export class NoteComponent implements OnInit {
@@ -51,7 +51,7 @@ export class NoteComponent implements OnInit {
   }
 
   restore() {
-    const oldNote = { ...this.note }
+    const oldNote = { ...this.note };
     this.note.trashed = false;
     this.action.execute(this.utils.actions.restoreTrashed, this.note, oldNote);
   }

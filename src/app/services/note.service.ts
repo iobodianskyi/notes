@@ -75,22 +75,22 @@ export class NoteService {
 
   private queryNotes() {
     return (ref: firebase.firestore.CollectionReference) => {
-      let query = ref
+      const query = ref
         .where(this.utils.db.fields.trashed, '==', false)
         .orderBy(this.utils.db.fields.created, 'desc');
 
       return query;
-    }
+    };
   }
 
   private queryTrashed() {
     return (ref: firebase.firestore.CollectionReference) => {
-      let query = ref
+      const query = ref
         .where(this.utils.db.fields.trashed, '==', true)
         .orderBy(this.utils.db.fields.created, 'desc');
 
       return query;
-    }
+    };
   }
 
   private mapNoteChanges() {
@@ -98,8 +98,8 @@ export class NoteService {
       return changeActions.map(changeAction => {
         const data = changeAction.payload.doc.data();
         return <Note>{ id: changeAction.payload.doc.id, ...data };
-      })
-    })
+      });
+    });
   }
 
   private getNoteCollection(): AngularFirestoreCollection<Note> {

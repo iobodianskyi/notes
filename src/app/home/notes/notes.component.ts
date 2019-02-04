@@ -9,7 +9,7 @@ import { Subscription, combineLatest } from 'rxjs';
 })
 export class NotesComponent implements OnInit, OnDestroy {
   notes: Note[];
-  allNotesLength: number = 0;
+  allNotesLength = 0;
   filteredNotes: Subscription;
   focused = false;
 

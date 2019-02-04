@@ -14,20 +14,20 @@ import { UtilsService } from 'src/app/services/utils.service';
 export class HeaderComponent implements OnInit, OnDestroy {
   menuCollapsed: boolean;
   user: AppUser;
-  userSubscribtion: Subscription;
+  userSubscription: Subscription;
   search: string;
-  hasColorFilter: boolean = false;
+  hasColorFilter = false;
 
   constructor(
     private router: Router,
     private utils: UtilsService,
     private account: AccountService,
     private notesService: NoteService,
-    private clenup: CleanUpService) { }
+    private cleanup: CleanUpService) { }
 
   ngOnInit() {
-    this.userSubscribtion = this.account.getAppUser()
-      .subscribe(user => { this.user = user });
+    this.userSubscription = this.account.getAppUser()
+      .subscribe(user => { this.user = user; });
   }
 
   toggleMenu() {
@@ -40,7 +40,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   searchChanged() {
     this.search = this.search.trim();
-    this.notesService.search$.next(this.search)
+    this.notesService.search$.next(this.search);
   }
 
   filterColor(color) {
@@ -51,12 +51,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   logout() {
     this.account.logout()
       .finally(() => {
-        this.clenup.cleanUpAppData();
+        this.cleanup.cleanUpAppData();
         this.router.navigate([this.utils.routes.root]);
       });
   }
 
   ngOnDestroy() {
-    this.userSubscribtion.unsubscribe();
+    this.userSubscription.unsubscribe();
   }
 }

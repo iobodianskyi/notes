@@ -8,10 +8,10 @@ export class UtilsService {
   };
 
   db = {
-    users: (): string => { return 'users/' },
-    user: (userId: string): string => { return this.db.users() + userId },
-    notes: (userId: string): string => { return this.db.user(userId) + '/notes/' },
-    note: (noteId: string, userId: string): string => { return this.db.notes(userId) + noteId },
+    users: (): string => 'users/',
+    user: (userId: string): string => this.db.users() + userId,
+    notes: (userId: string): string => this.db.user(userId) + '/notes/',
+    note: (noteId: string, userId: string): string => this.db.notes(userId) + noteId,
     fields: {
       created: 'created',
       trashed: 'trashed'
@@ -20,7 +20,7 @@ export class UtilsService {
 
   delays = {
     undoActionPresence: 10000
-  }
+  };
 
   actions = {
     create: {
@@ -47,7 +47,7 @@ export class UtilsService {
       name: 'set-color',
       title: 'Note updated'
     }
-  }
+  };
 
   constructor() { }
 }
