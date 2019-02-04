@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AccountService } from 'src/app/services/account.service';
 import { ActionService } from 'src/app/services/action.service';
 import { Subscription } from 'rxjs';
 import { Action } from 'src/app/models/actions';
@@ -10,13 +9,13 @@ import { Action } from 'src/app/models/actions';
 })
 export class FooterComponent implements OnInit, OnDestroy {
   lastAction: string;
-  lastActionSubscribtion: Subscription;
+  lastActionSubscription: Subscription;
   lastActionTitle: string;
 
   constructor(private action: ActionService) { }
 
   ngOnInit() {
-    this.lastActionSubscribtion = this.action.getLast()
+    this.lastActionSubscription = this.action.getLast()
       .subscribe((action: Action) => {
         if (action) {
           this.lastAction = action.info.name;
@@ -38,6 +37,6 @@ export class FooterComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.lastActionSubscribtion.unsubscribe();
+    this.lastActionSubscription.unsubscribe();
   }
 }

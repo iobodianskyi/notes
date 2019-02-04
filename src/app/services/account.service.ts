@@ -41,7 +41,19 @@ export class AccountService {
     this.firebaseAuth.auth.signInWithRedirect(provider);
   }
 
-  updateAppUser(user: User) {
+  checkRedirectSignUp() {
+    this.firebaseAuth.auth.getRedirectResult()
+      .then((result) => {
+        if (result.user) {
+          this.updateAppUser(result.user);
+        }
+      }).catch(function (error) {
+        const errorMessage = error.message;
+        console.log(error.message);
+      });
+  }
+
+  private updateAppUser(user: User) {
     const userDocument: AngularFirestoreDocument<AppUser> =
       this.firebaseStore.doc(this.utils.db.user(user.uid));
 

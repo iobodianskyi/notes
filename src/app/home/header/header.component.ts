@@ -14,7 +14,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 export class HeaderComponent implements OnInit, OnDestroy {
   menuCollapsed: boolean;
   user: AppUser;
-  userSubscribtion: Subscription;
+  userSubscription: Subscription;
   search: string;
   hasColorFilter = false;
 
@@ -23,10 +23,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private utils: UtilsService,
     private account: AccountService,
     private notesService: NoteService,
-    private clenup: CleanUpService) { }
+    private cleanup: CleanUpService) { }
 
   ngOnInit() {
-    this.userSubscribtion = this.account.getAppUser()
+    this.userSubscription = this.account.getAppUser()
       .subscribe(user => { this.user = user; });
   }
 
@@ -51,12 +51,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   logout() {
     this.account.logout()
       .finally(() => {
-        this.clenup.cleanUpAppData();
+        this.cleanup.cleanUpAppData();
         this.router.navigate([this.utils.routes.root]);
       });
   }
 
   ngOnDestroy() {
-    this.userSubscribtion.unsubscribe();
+    this.userSubscription.unsubscribe();
   }
 }
