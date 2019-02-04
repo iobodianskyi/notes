@@ -6,6 +6,7 @@ import { User } from 'firebase';
 import { AppUser } from '../models/user';
 import { Observable, of } from 'rxjs';
 import { UtilsService } from './utils.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -13,7 +14,8 @@ export class AccountService {
     private router: Router,
     private firebaseAuth: AngularFireAuth,
     private firebaseStore: AngularFirestore,
-    private utils: UtilsService) {
+    private utils: UtilsService,
+    private toastr: ToastrService) {
     this.firebaseAuth.authState
       .subscribe((user) => {
         if (!user) { this.router.navigate([this.utils.routes.root]); }
@@ -47,9 +49,8 @@ export class AccountService {
         if (result.user) {
           this.updateAppUser(result.user);
         }
-      }).catch(function (error) {
-        const errorMessage = error.message;
-        console.log(error.message);
+      }).catch((error) => {
+        this.toastr.info(error.message);
       });
   }
 
