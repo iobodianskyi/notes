@@ -1,3 +1,4 @@
+@import '~ngx-toastr/toastr.css';
 // common
 
 $gray: #C6C2C2
@@ -41,7 +42,7 @@ a
 
 .boxed
   background-color: #fff
-  border-radius: $radius 
+  border-radius: $radius
 
 .btn
   border-radius: $radius
@@ -68,7 +69,7 @@ input::placeholder
 
 .animated
   transition: $transition
-  
+
 .pointer
   cursor: pointer
 
@@ -182,9 +183,9 @@ header
     color: #fff
     font-size: 22px
     letter-spacing: 2px
-    
+
     &::placeholder
-      color: #fff !important 
+      color: #fff !important
 
   .color-option
     max-width: 140px
@@ -218,7 +219,7 @@ header
     top: -35px
     font-size: 25px
 
-    &.collapsed 
+    &.collapsed
       transform: translateY(40px)
 
     .nav-content
@@ -256,7 +257,7 @@ header
   height: 25px
   margin-right: 10px
 
-  &:last-child 
+  &:last-child
     margin-right: 0
 
   .color
@@ -300,7 +301,7 @@ header
     border-top: none
     border-radius: 20px
 
-  &:hover 
+  &:hover
     .options-container
       top: 5px
 
@@ -398,9 +399,18 @@ header
 
     &:hover
       opacity: 1
-  
+
   .undo-box
     font-size: 14px
+
+.toast-container
+  .toast
+    width: 400px
+    border-radius: 22px
+    background-color: #7b7b7b
+
+  &.toast-bottom-center
+    bottom: 14px
 
 // media
 
