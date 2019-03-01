@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+  - "7"
+
+branches:
+  only:
+    - master
+
+before_script:
+  - npm install -g firebase-tools
+
+script:
+  - ng build --prod
+
+after_success:
+  - firebase deploy — project notes-14a4a --token $FIREBASE_TOKEN
