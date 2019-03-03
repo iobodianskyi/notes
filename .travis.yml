@@ -13,4 +13,4 @@ script:
   - ng build --prod
 
 after_success:
-  - firebase deploy — project notes-14a4a --token $FIREBASE_TOKEN
+  - firebase deploy --project notes-14a4a --token $FIREBASE_TOKEN
