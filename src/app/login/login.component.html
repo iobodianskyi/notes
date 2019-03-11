@@ -1,5 +1,4 @@
-<div class="full-wrap"
-     id="login">
+<div class="full-wrap" id="login">
   <div class="wrap-border h-100">
     <div class="wrap-content h-100">
       <header class="container-fluid">
@@ -24,14 +23,14 @@
             <div class="text-center m-3">
               <div class="login-container mx-auto row">
                 <div class="col-12 col-sm-6 p-0 text-sm-right">
-                  <button class="app-btn lg w-auto"
-                          (click)="connectWithFacebook()">
+                  <button class="app-btn lg w-auto" (click)="connectWithFacebook()"
+                    onclick="ga('send', 'event', 'SignUp/Login', 'Connect With Facebook');">
                     Connect with Facebook
                   </button>
                 </div>
                 <div class="col-12 col-sm-6 p-0 text-sm-left">
-                  <button class="app-btn lg w-auto"
-                          (click)="connectWithGoogle()">
+                  <button class="app-btn lg w-auto" (click)="connectWithGoogle()"
+                    onclick="ga('send', 'event', 'SignUp/Login', 'Connect With Google');">
                     Connect with Google
                   </button>
                 </div>
