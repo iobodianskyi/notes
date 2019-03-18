@@ -51,3 +51,8 @@ For the most part, you can stick with the default settings, except for the follo
 ### Deploy
 
 `firebase deploy`
+
+### Continuous integration
+
+Auto deploy to Firebase Hosting is enabled for `master` branch.
+After each pull request `travis` executes build and deploy
