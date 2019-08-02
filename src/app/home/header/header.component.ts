@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AccountService } from 'src/app/services/account.service';
-import { AppUser } from 'src/app/models/user';
 import { Subscription } from 'rxjs';
 import { NoteService } from 'src/app/services/note.service';
 import { CleanUpService } from 'src/app/services/cleanup.service';
 import { Router } from '@angular/router';
 import { UtilsService } from 'src/app/services/utils.service';
+import { User } from 'firebase';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +13,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   menuCollapsed: boolean;
-  user: AppUser;
+  user: User;
   userSubscription: Subscription;
   search: string;
   hasColorFilter = false;

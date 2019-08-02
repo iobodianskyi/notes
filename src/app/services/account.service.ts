@@ -3,15 +3,16 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
 import { User } from 'firebase';
-import { AppUser } from '../models/user';
 import { Observable, of } from 'rxjs';
 import { UtilsService } from './utils.service';
 import { ToastrService } from 'ngx-toastr';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
   constructor(
     private router: Router,
+    private http: HttpClient,
     private firebaseAuth: AngularFireAuth,
     private firebaseStore: AngularFirestore,
     private utils: UtilsService,
@@ -22,10 +23,10 @@ export class AccountService {
       });
   }
 
-  getAppUser(): Observable<AppUser> {
+  getAppUser(): Observable<User> {
     const user = this.getUser();
     if (user) {
-      return this.firebaseStore.doc<AppUser>(this.utils.db.user(user.uid)).valueChanges();
+      return this.firebaseStore.doc<User>(this.utils.db.user(user.uid)).valueChanges();
     } else {
       return of(null);
     }
@@ -47,7 +48,7 @@ export class AccountService {
     this.firebaseAuth.auth.getRedirectResult()
       .then((result) => {
         if (result.user) {
-          this.updateAppUser(result.user);
+          this.updateAppUser(JSON.parse(JSON.stringify(result.user)));
         }
       }).catch((error) => {
         this.toastr.info(error.message);
@@ -55,17 +56,13 @@ export class AccountService {
   }
 
   private updateAppUser(user: User) {
-    const userDocument: AngularFirestoreDocument<AppUser> =
+    const userDocument: AngularFirestoreDocument<User> =
       this.firebaseStore.doc(this.utils.db.user(user.uid));
 
-    const updateUser: AppUser = {
-      id: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      photoUrl: user.photoURL
-    };
+    userDocument.set(user, { merge: true });
 
-    userDocument.set(updateUser, { merge: true });
+    // new user sign in notification
+    // this.http.post();
   }
 
   logout() {

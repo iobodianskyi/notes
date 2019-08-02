@@ -32,7 +32,7 @@
     </div>
     <div class="d-none col-3 d-md-flex justify-content-center align-items-center">
       <span *ngIf="user" [innerHTML]="user.displayName"></span>
-      <img class="user-logo" [src]="user.photoUrl" alt="Notes - User" *ngIf="user">
+      <img class="user-logo" [src]="user.photoURL" alt="Notes - User" *ngIf="user">
       <img class="logout pointer" src="/assets/img/logout.png" (click)="logout()"
         onclick="ga('send', 'event', 'Account', 'Logout');" *ngIf="user">
     </div>
@@ -56,7 +56,7 @@
         </div>
         <div class="nav-item d-flex align-items-center">
           <span *ngIf="user" [innerHTML]="user.displayName"></span>
-          <img class="user-logo" [src]="user.photoUrl" alt="Notes - User" *ngIf="user">
+          <img class="user-logo" [src]="user.photoURL" alt="Notes - User" *ngIf="user">
           <img class="logout pointer" src="/assets/img/logout-wt.png" (click)="logout()" *ngIf="user">
         </div>
       </div>

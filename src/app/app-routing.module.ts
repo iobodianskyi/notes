@@ -5,8 +5,8 @@ import { NotesComponent } from './home/notes/notes.component';
 import { HomeComponent } from './home/home.component';
 import { TrashComponent } from './home/trash/trash.component';
 import { AboutComponent } from './home/about/about.component';
-import { AuthGuard } from './services/auth.guard';
-import { LoggedInGuard } from './services/loggedin.guard';
+import { AuthGuard } from './guards/auth.guard';
+import { LoggedInGuard } from './guards/loggedin.guard';
 
 const routes: Routes = [
   { path: '', component: LoginComponent, pathMatch: 'full', canActivate: [LoggedInGuard] },

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { AccountService } from './account.service';
+import { AccountService } from '../services/account.service';
 import { Observable } from 'rxjs';
 import { tap, map, take } from 'rxjs/operators';
-import { UtilsService } from './utils.service';
+import { UtilsService } from '../services/utils.service';
 
 @Injectable({ providedIn: 'root' })
-export class LoggedInGuard implements CanActivate {
+export class AuthGuard implements CanActivate {
 
   constructor(
     private account: AccountService,
@@ -20,9 +20,9 @@ export class LoggedInGuard implements CanActivate {
     return this.account.getAuthState()
       .pipe(
         take(1),
-        map(user => !(!!user)),
-        tap(notLoggedIn => {
-          if (!notLoggedIn) { this.router.navigate([this.utils.routes.notes]); }
+        map(user => !!user),
+        tap(loggedIn => {
+          if (!loggedIn) { this.router.navigate([this.utils.routes.root]); }
         }));
   }
 }
