@@ -30,6 +30,8 @@ export class NotesComponent implements OnInit, OnDestroy {
   }
 
   focusOut(editElement) {
+    editElement.textContent = editElement.textContent.trim();
+
     if (editElement.textContent) {
       const date = new Date();
       const note = <Note>{
