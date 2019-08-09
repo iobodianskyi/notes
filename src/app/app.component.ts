@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoaderService } from './services/loader.service';
 import { AccountService } from './services/account.service';
 import { Router, NavigationEnd } from '@angular/router';
+import { UtilsService } from './services/utils.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,8 @@ export class AppComponent implements OnInit {
   constructor(
     private loader: LoaderService,
     private account: AccountService,
-    private router: Router) {
+    private router: Router,
+    private utils: UtilsService) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         (<any>window).ga('set', 'page', event.urlAfterRedirects);
@@ -25,6 +27,8 @@ export class AppComponent implements OnInit {
     this.updateLoader();
 
     this.account.checkRedirectSignUp();
+
+    this.utils.getAppInfo();
   }
 
   updateLoader() {

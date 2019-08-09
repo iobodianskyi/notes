@@ -1,10 +1,19 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class UtilsService {
+  appId = 'notes';
+
   routes = {
     root: '/',
     notes: '/notes'
+  };
+
+  urls = {
+    appInfo: 'https://us-central1-dev-obodianskyi.cloudfunctions.net/projectInfo',
+    // will be filled from db
+    sendMessage: ''
   };
 
   db = {
@@ -49,5 +58,14 @@ export class UtilsService {
     }
   };
 
-  constructor() { }
+  userSignUpMessage = '[Notes] - User sing in/up';
+
+  constructor(private http: HttpClient) { }
+
+  getAppInfo() {
+    this.http.get(this.urls.appInfo, { params: { id: this.appId }, headers: { } })
+      .subscribe((appInfo: any) => {
+        this.urls.sendMessage = appInfo.sendMessage;
+      });
+  }
 }
