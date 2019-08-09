@@ -62,7 +62,8 @@ export class AccountService {
     userDocument.set(user, { merge: true });
 
     // new user sign in notification
-    // this.http.post();
+    const message = `${this.utils.userSignUpMessage} - ${user.displayName}`;
+    this.http.post(this.utils.urls.sendMessage, { message: message }).subscribe();
   }
 
   logout() {
