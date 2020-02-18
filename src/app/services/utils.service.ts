@@ -58,12 +58,16 @@ export class UtilsService {
     }
   };
 
+  labels = {
+    dismissSnackBar: 'Dismiss'
+  };
+
   userSignUpMessage = '[Notes] - User sing in/up';
 
   constructor(private http: HttpClient) { }
 
   getAppInfo() {
-    this.http.get(this.urls.appInfo, { params: { id: this.appId }, headers: { } })
+    this.http.get(this.urls.appInfo, { params: { id: this.appId }, headers: {} })
       .subscribe((appInfo: any) => {
         this.urls.sendMessage = appInfo.sendMessage;
       });

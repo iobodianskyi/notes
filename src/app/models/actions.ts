@@ -6,7 +6,7 @@ export interface Action {
   oldNote: Note;
 }
 
-interface ActionInfo {
+export interface ActionInfo {
   name: string;
   title: string;
 }

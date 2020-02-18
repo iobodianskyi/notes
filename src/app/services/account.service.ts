@@ -5,8 +5,8 @@ import { AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firest
 import { User } from 'firebase';
 import { Observable, of } from 'rxjs';
 import { UtilsService } from './utils.service';
-import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -16,7 +16,7 @@ export class AccountService {
     private firebaseAuth: AngularFireAuth,
     private firebaseStore: AngularFirestore,
     private utils: UtilsService,
-    private toastr: ToastrService) {
+    private snackBar: MatSnackBar) {
     this.firebaseAuth.authState
       .subscribe((user) => {
         if (!user) { this.router.navigate([this.utils.routes.root]); }
@@ -40,7 +40,7 @@ export class AccountService {
     return this.firebaseAuth.auth.currentUser;
   }
 
-  login(provider) {
+  login(provider: firebase.auth.AuthProvider) {
     this.firebaseAuth.auth.signInWithRedirect(provider);
   }
 
@@ -51,7 +51,7 @@ export class AccountService {
           this.updateAppUser(JSON.parse(JSON.stringify(result.user)));
         }
       }).catch((error) => {
-        this.toastr.info(error.message);
+        this.snackBar.open(error.message, this.utils.labels.dismissSnackBar);
       });
   }
 

@@ -17,7 +17,7 @@ export class NoteComponent implements OnInit {
 
   ngOnInit() { }
 
-  focusOut(editedElement) {
+  focusOut(editedElement: any) {
     if (editedElement.textContent &&
       editedElement.textContent !== this.note.note) {
       const oldNote = { ...this.note };

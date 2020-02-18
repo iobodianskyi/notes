@@ -43,7 +43,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.notesService.search$.next(this.search);
   }
 
-  filterColor(color) {
+  filterColor(color: string) {
     this.notesService.color$.next(color);
     this.hasColorFilter = !!color;
   }

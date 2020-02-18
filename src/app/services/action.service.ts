@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { UtilsService } from './utils.service';
 import { NoteService } from './note.service';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { Action } from '../models/actions';
+import { Action, ActionInfo } from '../models/actions';
 import { Note } from '../models/note';
 
 @Injectable({ providedIn: 'root' })
 export class ActionService {
   private lastAction$ = new BehaviorSubject<Action>(null);
   private lastAction: Action = null;
-  private timerRemovingUndoAction;
+  private timerRemovingUndoAction: any;
 
   constructor(
     private noteService: NoteService,
@@ -17,8 +17,8 @@ export class ActionService {
 
   getLast(): Observable<Action> { return this.lastAction$; }
 
-  execute(info, newNote: Note, oldNote: Note): any {
-    let actionPromise;
+  execute(info: ActionInfo, newNote: Note, oldNote: Note): any {
+    let actionPromise: Promise<void>;
 
     const lastAction = <Action>{ info, newNote, oldNote };
 
@@ -45,8 +45,8 @@ export class ActionService {
       });
   }
 
-  undoLast(name) {
-    let actionPromise;
+  async undoLast(name: string) {
+    let actionPromise: Promise<void>;
     switch (name) {
       case this.utils.actions.edit.name:
       case this.utils.actions.setColor.name:
@@ -68,11 +68,10 @@ export class ActionService {
       }
     }
 
-    return actionPromise
-      .then(() => {
-        this.lastAction = null;
-        this.lastAction$.next(null);
-      });
+    await actionPromise;
+
+    this.lastAction = null;
+    this.lastAction$.next(null);
   }
 
   nextAction(lastAction: Action) {
