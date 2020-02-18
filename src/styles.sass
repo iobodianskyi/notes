@@ -49,7 +49,7 @@ a
 
 .app-btn
   width: 150px
-  padding: 5px
+  padding: 5px 15px
   font-size: 12px
   border: $border
   border-radius: $radius
@@ -402,17 +402,22 @@ header
   .undo-box
     font-size: 14px
 
-.toast-container
-  .toast
-    width: 400px
-    border-radius: 22px
-    background-color: #7b7b7b
-
-  &.toast-bottom-center
-    bottom: 14px
-
 .mat-simple-snackbar
   word-break: break-all
+
+.app-dialog 
+  .mat-dialog-container
+    border-radius: 10px
+    background: #878484
+
+    .title
+      font-weight: normal
+
+  .mat-dialog-actions
+    justify-content: flex-end
+
+  button:not(:first-child)
+    margin-left: 10px
 
 // media
 

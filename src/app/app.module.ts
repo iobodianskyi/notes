@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 
-import { MatSnackBarModule } from '@angular/material';
+import { MatSnackBarModule, MatDialogModule } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +21,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { NoteComponent } from './home/notes/note/note.component';
 import { FormsModule } from '@angular/forms';
 import { FooterComponent } from './home/footer/footer.component';
+import { ConfirmTrashDialogComponent } from './dialogs/confirm-trash/confirm-trash-dialog.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { FooterComponent } from './home/footer/footer.component';
     FooterComponent,
     TrashComponent,
     AboutComponent,
-    NoteComponent
+    NoteComponent,
+    ConfirmTrashDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -44,8 +46,10 @@ import { FooterComponent } from './home/footer/footer.component';
     AngularFireAuthModule,
     AngularFirestoreModule,
     BrowserAnimationsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule
   ],
+  entryComponents: [ConfirmTrashDialogComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
