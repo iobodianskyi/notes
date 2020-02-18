@@ -16,10 +16,10 @@ export class NotesComponent implements OnInit, OnDestroy {
   constructor(private noteService: NoteService) { }
 
   ngOnInit() {
-    this.filteredNotes = combineLatest(
+    this.filteredNotes = combineLatest([
       this.noteService.getAll(),
       this.noteService.search$,
-      this.noteService.color$)
+      this.noteService.color$])
       .subscribe(([notes, search, color]) => {
         this.allNotesLength = notes.length;
         this.notes = notes
@@ -29,7 +29,7 @@ export class NotesComponent implements OnInit, OnDestroy {
       });
   }
 
-  focusOut(editElement) {
+  focusOut(editElement: any) {
     editElement.textContent = editElement.textContent.trim();
 
     if (editElement.textContent) {

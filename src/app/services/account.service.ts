@@ -40,7 +40,7 @@ export class AccountService {
     return this.firebaseAuth.auth.currentUser;
   }
 
-  login(provider) {
+  login(provider: firebase.auth.AuthProvider) {
     this.firebaseAuth.auth.signInWithRedirect(provider);
   }
 

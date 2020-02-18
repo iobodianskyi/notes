@@ -63,7 +63,7 @@ export class UtilsService {
   constructor(private http: HttpClient) { }
 
   getAppInfo() {
-    this.http.get(this.urls.appInfo, { params: { id: this.appId }, headers: { } })
+    this.http.get(this.urls.appInfo, { params: { id: this.appId }, headers: {} })
       .subscribe((appInfo: any) => {
         this.urls.sendMessage = appInfo.sendMessage;
       });

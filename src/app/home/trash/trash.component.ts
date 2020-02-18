@@ -15,10 +15,10 @@ export class TrashComponent implements OnInit, OnDestroy {
   constructor(private noteService: NoteService) { }
 
   ngOnInit() {
-    this.filteredNotes = combineLatest(
+    this.filteredNotes = combineLatest([
       this.noteService.getTrashed(),
       this.noteService.search$,
-      this.noteService.color$)
+      this.noteService.color$])
       .subscribe(([notes, search, color]) => {
         this.allTrashedLength = notes.length;
         this.trashedNotes = notes
