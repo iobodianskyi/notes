@@ -58,6 +58,10 @@ export class UtilsService {
     }
   };
 
+  labels = {
+    dismissSnackBar: 'Dismiss'
+  };
+
   userSignUpMessage = '[Notes] - User sing in/up';
 
   constructor(private http: HttpClient) { }
