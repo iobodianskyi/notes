@@ -22,6 +22,7 @@ import { NoteComponent } from './home/notes/note/note.component';
 import { FormsModule } from '@angular/forms';
 import { FooterComponent } from './home/footer/footer.component';
 import { ConfirmTrashDialogComponent } from './dialogs/confirm-trash/confirm-trash-dialog.component';
+import { MenuDialogComponent } from './dialogs/menu-dialog/menu-dialog.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ConfirmTrashDialogComponent } from './dialogs/confirm-trash/confirm-tra
     TrashComponent,
     AboutComponent,
     NoteComponent,
-    ConfirmTrashDialogComponent
+    ConfirmTrashDialogComponent,
+    MenuDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,7 @@ import { ConfirmTrashDialogComponent } from './dialogs/confirm-trash/confirm-tra
     MatSnackBarModule,
     MatDialogModule
   ],
-  entryComponents: [ConfirmTrashDialogComponent],
+  entryComponents: [ConfirmTrashDialogComponent, MenuDialogComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -58,6 +58,16 @@ export class UtilsService {
     }
   };
 
+  menuDialogOptions = {
+    panelClass: 'app-dialog',
+    position: { top: '20px' },
+    minWidth: '90vw'
+  };
+
+  menuActions = {
+    logout: 'logout'
+  };
+
   labels = {
     dismissSnackBar: 'Dismiss'
   };

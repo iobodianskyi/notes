@@ -58,6 +58,7 @@ a
   user-select: none
   cursor: pointer
   color: $gray
+  background-color: #fff
 
   &.lg
     font-size: 15px
@@ -188,6 +189,54 @@ header
     &::placeholder
       color: #fff !important
 
+  .nav-toggle
+    position: relative
+    z-index: 350
+
+    .toggle-item
+      width: 20px
+      height: 4px
+      margin: 2px
+      border-radius: 5px
+      background: #fff
+
+// menu
+
+.mobile-nav
+  font-size: 25px
+
+  .nav-content
+    position: relative
+    overflow: scroll
+    max-height: calc(100vh - 75px)
+    color: #fff
+
+    .nav-item
+      color: $gray
+      margin: 10px
+      font-size: 16px
+      outline: none
+
+      &.active
+        color: #fff
+
+      &:first-child
+        margin-top: 10px
+
+      &:last-child
+        margin-bottom: 10px
+
+    .user-name
+      color: #fff
+
+    .menu-close
+      position: absolute;
+      top: -10px;
+      right: 0;
+      cursor: pointer
+
+header,
+.mobile-nav
   .color-option
     max-width: 140px
     width: 140px
@@ -202,57 +251,9 @@ header
     width: 25px
     margin-left: 10px
 
-  .nav-toggle
-    position: relative
-    z-index: 350
+.menu-dialog
+  width: 90vw
 
-    .toggle-item
-      width: 20px
-      height: 4px
-      margin: 2px
-      border-radius: 5px
-      background: #fff
-
-  .mobile-nav
-    position: relative
-    z-index: 300
-    transform: translateY(-100%)
-    top: -35px
-    font-size: 25px
-
-    &.collapsed
-      transform: translateY(40px)
-
-    .nav-content
-      overflow: scroll
-      max-height: calc(100vh - 75px)
-      border-radius: 10px
-      background: $gray
-      color: #fff
-
-      .nav-item
-        color: #fff
-        margin: 10px
-
-        &:first-child
-          margin-top: 10px
-
-        &:last-child
-          margin-bottom: 10px
-
-  .overlay
-    display: none
-    position: fixed
-    top: 0
-    right: 0
-    bottom: 0
-    left: 0
-    z-index: 250
-    background: #000
-    opacity: 0.5
-
-    &.collapsed
-      display: block
 
 .color-option
   height: 25px
