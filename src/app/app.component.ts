@@ -10,6 +10,7 @@ import { UtilsService } from './services/utils.service';
 })
 export class AppComponent implements OnInit {
   hasLoader = true;
+  user: any;
 
   constructor(
     private loader: LoaderService,
@@ -22,7 +23,11 @@ export class AppComponent implements OnInit {
         (<any>window).ga('send', 'pageview');
       }
     });
+
+    this.account.getAuthState()
+      .subscribe(user => { this.user = user; });
   }
+
   ngOnInit(): void {
     this.updateLoader();
 
