@@ -16,7 +16,7 @@ import { MenuDialogComponent } from 'src/app/dialogs/menu-dialog/menu-dialog.com
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   user: User;
-  userSubscription: Subscription;
+  subscription = new Subscription();
   search: string;
 
   constructor(
@@ -28,8 +28,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     public notesService: NoteService) { }
 
   ngOnInit() {
-    this.userSubscription = this.account.getAppUser()
-      .subscribe(user => { this.user = user; });
+    this.subscription.add(
+      this.account.getAppUser()
+        .subscribe(user => { this.user = user; }));
   }
 
   openMenu() {
@@ -65,6 +66,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.userSubscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
 }

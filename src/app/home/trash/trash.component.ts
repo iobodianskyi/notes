@@ -12,22 +12,23 @@ import { ConfirmTrashDialogComponent } from 'src/app/dialogs/confirm-trash/confi
 export class TrashComponent implements OnInit, OnDestroy {
   trashedNotes: Note[];
   allTrashedLength = 0;
-  filteredNotes: Subscription;
+  subscription = new Subscription();
 
   constructor(private noteService: NoteService, public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.filteredNotes = combineLatest([
-      this.noteService.getTrashed(),
-      this.noteService.search$,
-      this.noteService.color$])
-      .subscribe(([notes, search, color]) => {
-        this.allTrashedLength = notes.length;
-        this.trashedNotes = notes
-          .filter((note: Note) =>
-            note.note.toLowerCase().includes(search.toLowerCase()) &&
-            note.color.includes(color));
-      });
+    this.subscription.add(
+      combineLatest([
+        this.noteService.getTrashed(),
+        this.noteService.search$,
+        this.noteService.color$])
+        .subscribe(([notes, search, color]) => {
+          this.allTrashedLength = notes.length;
+          this.trashedNotes = notes
+            .filter((note: Note) =>
+              note.note.toLowerCase().includes(search.toLowerCase()) &&
+              note.color.includes(color));
+        }));
   }
 
   emptyTrash() {
@@ -45,6 +46,6 @@ export class TrashComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.filteredNotes.unsubscribe();
+    this.subscription.unsubscribe();
   }
 }
