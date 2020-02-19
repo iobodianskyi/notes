@@ -1,4 +1,20 @@
-<router-outlet></router-outlet>
-<div class="app-loader" *ngIf="hasLoader">
-  <img src="/assets/img/loader.svg">
+<div class="full-wrap">
+  <div class="wrap-border h-100">
+    <div class="wrap-content h-100">
+      <header class="container-fluid" *ngIf="!user">
+        <div class="row">
+          <div class="col-2 col-md-3"></div>
+          <div class="col-8 col-md-6 p-0">
+            <div class="head d-flex justify-content-around align-items-center"></div>
+          </div>
+          <div class="col-3"></div>
+        </div>
+      </header>
+      <router-outlet></router-outlet>
+      <div class="app-loader" *ngIf="hasLoader">
+        <img src="/assets/img/loader.svg">
+      </div>
+      <app-footer></app-footer>
+    </div>
+  </div>
 </div>
