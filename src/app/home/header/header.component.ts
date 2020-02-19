@@ -1,41 +1,50 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AccountService } from 'src/app/services/account.service';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { User } from 'firebase';
+
+import { AccountService } from 'src/app/services/account.service';
 import { NoteService } from 'src/app/services/note.service';
 import { CleanUpService } from 'src/app/services/cleanup.service';
-import { Router } from '@angular/router';
 import { UtilsService } from 'src/app/services/utils.service';
-import { User } from 'firebase';
+import { MenuDialogComponent } from 'src/app/dialogs/menu-dialog/menu-dialog.component';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  menuCollapsed: boolean;
   user: User;
   userSubscription: Subscription;
   search: string;
-  hasColorFilter = false;
 
   constructor(
     private router: Router,
     private utils: UtilsService,
     private account: AccountService,
-    private notesService: NoteService,
-    private cleanup: CleanUpService) { }
+    private cleanup: CleanUpService,
+    private dialog: MatDialog,
+    public notesService: NoteService) { }
 
   ngOnInit() {
     this.userSubscription = this.account.getAppUser()
       .subscribe(user => { this.user = user; });
   }
 
-  toggleMenu() {
-    this.menuCollapsed = !this.menuCollapsed;
-  }
+  openMenu() {
+    const dialogRef = this.dialog.open(MenuDialogComponent, this.utils.menuDialogOptions);
 
-  hideNavMenu() {
-    this.menuCollapsed = false;
+    dialogRef.afterClosed().subscribe((action: string) => {
+      switch (action) {
+        case this.utils.menuActions.logout: {
+          this.logout();
+          break;
+        }
+        default:
+          break;
+      }
+    });
   }
 
   searchChanged() {
@@ -45,7 +54,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   filterColor(color: string) {
     this.notesService.color$.next(color);
-    this.hasColorFilter = !!color;
   }
 
   logout() {
