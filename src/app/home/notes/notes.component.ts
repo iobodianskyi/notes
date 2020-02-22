@@ -10,23 +10,24 @@ import { Subscription, combineLatest } from 'rxjs';
 export class NotesComponent implements OnInit, OnDestroy {
   notes: Note[];
   allNotesLength = 0;
-  filteredNotes: Subscription;
+  subscription = new Subscription();
   focused = false;
 
   constructor(private noteService: NoteService) { }
 
   ngOnInit() {
-    this.filteredNotes = combineLatest([
-      this.noteService.getAll(),
-      this.noteService.search$,
-      this.noteService.color$])
-      .subscribe(([notes, search, color]) => {
-        this.allNotesLength = notes.length;
-        this.notes = notes
-          .filter((note: Note) =>
-            note.note.toLowerCase().includes(search.toLowerCase()) &&
-            note.color.includes(color));
-      });
+    this.subscription.add(
+      combineLatest([
+        this.noteService.getAll(),
+        this.noteService.search$,
+        this.noteService.color$])
+        .subscribe(([notes, search, color]) => {
+          this.allNotesLength = notes.length;
+          this.notes = notes
+            .filter((note: Note) =>
+              note.note.toLowerCase().includes(search.toLowerCase()) &&
+              note.color.includes(color));
+        }));
   }
 
   focusOut(editElement: any) {
@@ -51,6 +52,6 @@ export class NotesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.filteredNotes.unsubscribe();
+    this.subscription.unsubscribe();
   }
 }

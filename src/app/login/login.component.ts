@@ -8,7 +8,8 @@ import { LoaderService } from '../services/loader.service';
 
 @Component({ templateUrl: './login.component.html' })
 export class LoginComponent implements OnInit, OnDestroy {
-  private login$: Subscription;
+  private subscription = new Subscription();
+
   constructor(
     private router: Router,
     private account: AccountService,
@@ -16,10 +17,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     private loader: LoaderService) { }
 
   ngOnInit() {
-    this.login$ = this.account.getAuthState()
-      .subscribe((user) => {
-        if (user) { this.router.navigate([this.utils.routes.notes]); }
-      });
+    this.subscription.add(
+      this.account.getAuthState()
+        .subscribe((user) => {
+          if (user) { this.router.navigate([this.utils.routes.notes]); }
+        }));
 
     this.loader.remove();
   }
@@ -35,6 +37,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.login$.unsubscribe();
+    this.subscription.unsubscribe();
   }
 }

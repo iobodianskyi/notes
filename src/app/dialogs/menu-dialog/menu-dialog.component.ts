@@ -14,7 +14,7 @@ import { NoteService } from 'src/app/services/note.service';
 })
 export class MenuDialogComponent implements OnInit, OnDestroy {
   user: User;
-  userSubscription = new Subscription();
+  subscription = new Subscription();
   actions: any;
 
   constructor(
@@ -26,7 +26,7 @@ export class MenuDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.userSubscription.add(
+    this.subscription.add(
       this.account.getAuthState()
         .subscribe(user => { this.user = user; }));
   }
@@ -40,6 +40,6 @@ export class MenuDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.userSubscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
 }

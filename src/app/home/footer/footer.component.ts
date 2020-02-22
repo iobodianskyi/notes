@@ -9,21 +9,22 @@ import { Action } from 'src/app/models/actions';
 })
 export class FooterComponent implements OnInit, OnDestroy {
   lastAction: string;
-  lastActionSubscription: Subscription;
+  subscription = new Subscription();
   lastActionTitle: string;
 
   constructor(private action: ActionService) { }
 
   ngOnInit() {
-    this.lastActionSubscription = this.action.getLast()
-      .subscribe((action: Action) => {
-        if (action) {
-          this.lastAction = action.info.name;
-          this.lastActionTitle = action.info.title;
-        } else {
-          this.resetAction();
-        }
-      });
+    this.subscription.add(
+      this.action.getLast()
+        .subscribe((action: Action) => {
+          if (action) {
+            this.lastAction = action.info.name;
+            this.lastActionTitle = action.info.title;
+          } else {
+            this.resetAction();
+          }
+        }));
   }
 
   undoAction() {
@@ -37,6 +38,6 @@ export class FooterComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.lastActionSubscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
 }
