@@ -6,10 +6,13 @@ import { User } from 'firebase';
 import { Observable, of } from 'rxjs';
 import { UtilsService } from './utils.service';
 import { HttpClient } from '@angular/common/http';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
+
+  user: User;
+
   constructor(
     private router: Router,
     private http: HttpClient,
@@ -19,6 +22,7 @@ export class AccountService {
     private snackBar: MatSnackBar) {
     this.firebaseAuth.authState
       .subscribe((user) => {
+        this.user = user;
         if (!user) { this.router.navigate([this.utils.routes.root]); }
       });
   }
@@ -37,15 +41,15 @@ export class AccountService {
   }
 
   getUser(): User {
-    return this.firebaseAuth.auth.currentUser;
+    return this.user;
   }
 
   login(provider: firebase.auth.AuthProvider) {
-    this.firebaseAuth.auth.signInWithRedirect(provider);
+    this.firebaseAuth.signInWithRedirect(provider);
   }
 
   checkRedirectSignUp() {
-    this.firebaseAuth.auth.getRedirectResult()
+    this.firebaseAuth.getRedirectResult()
       .then((result) => {
         if (result.user) {
           this.updateAppUser(JSON.parse(JSON.stringify(result.user)));
@@ -67,6 +71,6 @@ export class AccountService {
   }
 
   logout() {
-    return this.firebaseAuth.auth.signOut();
+    return this.firebaseAuth.signOut();
   }
 }
