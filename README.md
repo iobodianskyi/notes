@@ -56,3 +56,7 @@ For the most part, you can stick with the default settings, except for the follo
 
 Auto deploy to Firebase Hosting is enabled for `master` branch.
 After each pull request `travis` executes build and deploy
+
+![4  Daily-notes-app](https://user-images.githubusercontent.com/7642250/171150243-2ea4f0ea-9cc6-496c-8423-260b771457df.png)
+
+
